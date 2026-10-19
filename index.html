@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>慈濟大學 經營管理學系 | Department of Business Management, TCU</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter & Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Internal CSS: Strict Warm Palette System -->
+    <style>
+        :root {
+            /* Backgrounds: Warm Ivory & Soft Cream/Peach */
+            --bg-body: #fdfbf7;
+            --bg-body-alt: #fcf5eb;
+            --bg-card: #fff7ed;
+            --bg-card-hover: #ffedd5;
+            --bg-modal: #fef8f0;
+
+            /* Warm Terracotta & Amber Primary Palette */
+            --brand-terracotta: #c2410c;
+            --brand-terracotta-dark: #9a3412;
+            --brand-amber: #d97706;
+            --brand-amber-light: #fef3c7;
+            --brand-sunset: #f59e0b;
+            --brand-peach: #ffedd5;
+
+            /* Borders & Shadows */
+            --border-warm: #fed7aa;
+            --border-warm-hover: #fdba74;
+            --shadow-warm: 0 10px 30px -5px rgba(194, 65, 12, 0.08);
+            --shadow-warm-lg: 0 20px 40px -10px rgba(194, 65, 12, 0.15);
+
+            /* Typography: Deep Warm Chestnut & Muted Slate Brown */
+            --text-main: #292524;
+            --text-muted: #57534e;
+            --text-subtle: #78716c;
+            --text-cream: #fffbf7;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* Frosted Glass Warm Navigation Header */
+        .warm-nav {
+            background: rgba(253, 251, 247, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-warm);
+        }
+
+        /* Warm Layered Card Component */
+        .warm-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-warm);
+            box-shadow: var(--shadow-warm);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .warm-card:hover {
+            transform: translateY(-4px);
+            background-color: var(--bg-card-hover);
+            border-color: var(--border-warm-hover);
+            box-shadow: var(--shadow-warm-lg);
+        }
+
+        /* Terracotta Primary & Outline Buttons */
+        .btn-terracotta {
+            background-color: var(--brand-terracotta);
+            color: var(--text-cream);
+            transition: all 0.25s ease;
+        }
+        .btn-terracotta:hover {
+            background-color: var(--brand-terracotta-dark);
+            box-shadow: 0 8px 20px rgba(194, 65, 12, 0.25);
+        }
+
+        .btn-outline-warm {
+            background-color: transparent;
+            color: var(--brand-terracotta);
+            border: 1.5px solid var(--brand-terracotta);
+            transition: all 0.25s ease;
+        }
+        .btn-outline-warm:hover {
+            background-color: var(--bg-card-hover);
+            border-color: var(--brand-terracotta-dark);
+            color: var(--brand-terracotta-dark);
+        }
+
+        /* Navigation Link Scrollspy Active State */
+        .nav-link {
+            position: relative;
+            transition: color 0.25s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0%;
+            height: 2.5px;
+            background-color: var(--brand-terracotta);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+        .nav-link.active {
+            color: var(--brand-terracotta);
+            font-weight: 700;
+        }
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Filter Tab Buttons */
+        .filter-btn {
+            background-color: var(--bg-card);
+            color: var(--text-muted);
+            border: 1px solid var(--border-warm);
+            transition: all 0.25s ease;
+        }
+        .filter-btn:hover {
+            background-color: var(--bg-card-hover);
+            color: var(--text-main);
+        }
+        .filter-btn.active {
+            background-color: var(--brand-terracotta);
+            color: var(--text-cream);
+            border-color: var(--brand-terracotta);
+            box-shadow: 0 4px 14px rgba(194, 65, 12, 0.25);
+        }
+
+        /* Interactive Modal Animation Classes */
+        .modal-active {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+        .modal-box-active {
+            transform: scale(1) translateY(0) !important;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-body-alt);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-warm-hover);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--brand-terracotta);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-orange-200 selection:text-stone-900">
+
+    <!-- ==================== HEADER & NAVIGATION ==================== -->
+    <header class="fixed top-0 left-0 right-0 z-50 warm-nav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Logo & Department Name -->
+                <a href="#" class="flex items-center space-x-3.5 group">
+                    <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-xl font-bold text-orange-50 shadow-md group-hover:scale-105 transition-transform" style="background-color: var(--brand-terracotta);">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <span class="block text-[11px] font-extrabold tracking-wider uppercase" style="color: var(--brand-terracotta);">Tzu Chi University</span>
+                        <span class="block text-lg font-black tracking-tight" style="color: var(--text-main);">經營管理學系</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links (Scrollspy Tracking) -->
+                <nav class="hidden md:flex items-center space-x-7 text-sm font-semibold" style="color: var(--text-muted);">
+                    <a href="#about" class="nav-link hover:text-orange-700">系所簡介</a>
+                    <a href="#facilities" class="nav-link hover:text-orange-700">特色教室</a>
+                    <a href="#curriculum" class="nav-link hover:text-orange-700">課程規劃</a>
+                    <a href="#careers" class="nav-link hover:text-orange-700">職涯發展</a>
+                    <a href="#faq" class="nav-link hover:text-orange-700">常見問答</a>
+                    <a href="#contact" class="nav-link hover:text-orange-700">聯絡我們</a>
+                </nav>
+
+                <!-- Action Button -->
+                <div class="hidden md:flex items-center space-x-3">
+                    <a href="#contact" class="px-5 py-2.5 text-sm font-bold rounded-full shadow-sm flex items-center gap-2 btn-terracotta">
+                        <i class="fa-solid fa-paper-plane text-xs"></i> 諮詢與招生
+                    </a>
+                </div>
+
+                <!-- Mobile Hamburger Toggle -->
+                <button id="mobileMenuBtn" class="md:hidden p-2 rounded-xl focus:outline-none" style="color: var(--text-main);" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation Menu -->
+        <div id="mobileMenu" class="hidden md:hidden border-b px-6 pt-3 pb-6 space-y-3 shadow-xl" style="background-color: var(--bg-body-alt); border-color: var(--border-warm);">
+            <a href="#about" class="block px-3 py-2.5 rounded-xl text-base font-bold text-stone-800 hover:bg-orange-100">系所簡介</a>
+            <a href="#facilities" class="block px-3 py-2.5 rounded-xl text-base font-bold text-stone-800 hover:bg-orange-100">特色教室</a>
+            <a href="#curriculum" class="block px-3 py-2.5 rounded-xl text-base font-bold text-stone-800 hover:bg-orange-100">課程規劃</a>
+            <a href="#careers" class="block px-3 py-2.5 rounded-xl text-base font-bold text-stone-800 hover:bg-orange-100">職涯發展</a>
+            <a href="#faq" class="block px-3 py-2.5 rounded-xl text-base font-bold text-stone-800 hover:bg-orange-100">常見問答</a>
+            <a href="#contact" class="block px-3 py-2.5 rounded-xl text-base font-bold text-stone-800 hover:bg-orange-100">聯絡我們</a>
+            <a href="#contact" class="block w-full text-center px-4 py-3 font-bold rounded-xl shadow-md btn-terracotta">諮詢與招生</a>
+        </div>
+    </header>
+
+    <!-- ==================== HERO BANNER ==================== -->
+    <section class="relative pt-32 pb-20 md:pt-40 md:pb-28 border-b overflow-hidden" style="background-color: var(--bg-body); border-color: var(--border-warm);">
+        <!-- Warm Glow Background Accents -->
+        <div class="absolute top-10 right-10 w-96 h-96 rounded-full blur-3xl pointer-events-none opacity-50" style="background-color: #fde68a;"></div>
+        <div class="absolute -bottom-10 left-10 w-80 h-80 rounded-full blur-3xl pointer-events-none opacity-40" style="background-color: #ffedd5;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Left Headline & Action -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold border shadow-xs" style="background-color: var(--bg-card); border-color: var(--border-warm); color: var(--brand-terracotta);">
+                        <span class="w-2.5 h-2.5 rounded-full animate-ping" style="background-color: var(--brand-sunset);"></span>
+                        慈濟大學 經營管理學系 Department of Business Management
+                    </div>
+
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight" style="color: var(--text-main);">
+                        培養兼具人文素養與<br>
+                        <span style="color: var(--brand-terracotta);">智慧前瞻能力的跨域商管人才</span>
+                    </h1>
+
+                    <p class="text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium" style="color: var(--text-muted);">
+                        以<strong>個案翻轉教學 ‧ 智慧零售實習 ‧ ESG 永續管理 ‧ 跨國交流</strong>為核心，引導學生在溫暖人文的校園情境中，具備引領產業創新與決策的核心能力。
+                    </p>
+
+                    <!-- Hero Call to Action Buttons -->
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#curriculum" class="px-7 py-3.5 text-base font-bold rounded-2xl shadow-md flex items-center gap-2 btn-terracotta">
+                            <i class="fa-solid fa-book-open text-sm"></i> 探索課程規劃
+                        </a>
+                        <a href="#facilities" class="px-7 py-3.5 text-base font-bold rounded-2xl shadow-xs flex items-center gap-2 btn-outline-warm">
+                            <i class="fa-solid fa-store text-orange-700"></i> 參觀特色教室
+                        </a>
+                    </div>
+
+                    <!-- Hero Stats Bar -->
+                    <div class="pt-6 border-t flex flex-wrap justify-center lg:justify-start gap-6 text-xs sm:text-sm font-bold" style="border-color: var(--border-warm); color: var(--text-muted);">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-base" style="color: var(--brand-terracotta);"></i> 5 大專業實務教室
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-base" style="color: var(--brand-amber);"></i> 100% 實戰實習對接
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-base" style="color: var(--brand-sunset);"></i> 雙軸心 ESG 永續跨域
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Right Feature Summary Card Stack -->
+                <div class="lg:col-span-5">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <div class="warm-card rounded-3xl p-7 relative z-10 space-y-5">
+                            <div class="flex items-center justify-between border-b pb-4" style="border-color: var(--border-warm);">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-11 h-11 rounded-2xl flex items-center justify-center font-bold text-lg" style="background-color: var(--brand-amber-light); color: var(--brand-amber);">
+                                        <i class="fa-solid fa-chart-line"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-extrabold text-sm" style="color: var(--text-main);">四大核心亮點</h3>
+                                        <p class="text-xs" style="color: var(--text-muted);">Core Pillars of Excellence</p>
+                                    </div>
+                                </div>
+                                <span class="px-3 py-1 text-xs font-bold rounded-full border" style="background-color: var(--bg-body-alt); border-color: var(--border-warm); color: var(--brand-terracotta);">學用合一</span>
+                            </div>
+
+                            <div class="space-y-3 text-sm">
+                                <div class="p-3.5 rounded-2xl flex items-start space-x-3 border" style="background-color: var(--bg-body-alt); border-color: var(--border-warm);">
+                                    <div class="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold shrink-0 mt-0.5" style="background-color: var(--brand-terracotta); color: var(--text-cream);">1</div>
+                                    <div>
+                                        <p class="font-bold" style="color: var(--text-main);">智慧營運與 AI 分析工具</p>
+                                        <p class="text-xs mt-0.5" style="color: var(--text-muted);">結合商業數據分析、敏捷專案管理與數位行銷</p>
+                                    </div>
+                                </div>
+
+                                <div class="p-3.5 rounded-2xl flex items-start space-x-3 border" style="background-color: var(--bg-body-alt); border-color: var(--border-warm);">
+                                    <div class="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold shrink-0 mt-0.5" style="background-color: var(--brand-amber); color: var(--text-cream);">2</div>
+                                    <div>
+                                        <p class="font-bold" style="color: var(--text-main);">知足咖啡館與智慧商店實習</p>
+                                        <p class="text-xs mt-0.5" style="color: var(--text-muted);">校內真實商業場域實體門市經營體驗</p>
+                                    </div>
+                                </div>
+
+                                <div class="p-3.5 rounded-2xl flex items-start space-x-3 border" style="background-color: var(--bg-body-alt); border-color: var(--border-warm);">
+                                    <div class="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold shrink-0 mt-0.5" style="background-color: var(--brand-sunset); color: var(--text-cream);">3</div>
+                                    <div>
+                                        <p class="font-bold" style="color: var(--text-main);">翻轉課堂與影音 Pitch 簡報</p>
+                                        <p class="text-xs mt-0.5" style="color: var(--text-muted);">哈佛個案討論與專業簡報演練教室訓練</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-4 rounded-2xl flex justify-between items-center shadow-xs" style="background-color: var(--brand-terracotta-dark); color: var(--text-cream);">
+                                <div>
+                                    <p class="text-xs opacity-80">典雅校園環境</p>
+                                    <p class="font-bold text-sm">花蓮介仁校區 (人文氛圍學府)</p>
+                                </div>
+                                <i class="fa-solid fa-map-location-dot text-2xl opacity-90"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ABOUT SECTION ==================== -->
+    <section id="about" class="py-20 border-b" style="background-color: var(--bg-body-alt); border-color: var(--border-warm);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <span class="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full border" style="background-color: var(--bg-card); border-color: var(--border-warm); color: var(--brand-terracotta);">About Our Department</span>
+                <h2 class="text-3xl font-extrabold sm:text-4xl" style="color: var(--text-main);">系所簡介與發展定位</h2>
+                <p class="text-base leading-relaxed" style="color: var(--text-muted);">
+                    融合慈濟關懷利他的人文精神與現代企業經營管理，培育具備數據思維、永續價值與國際視野之優秀商管人才。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                <!-- Left Goals & Orientations -->
+                <div class="space-y-6">
+                    <div class="p-7 rounded-3xl border space-y-3 warm-card">
+                        <div class="flex items-center space-x-3 font-bold" style="color: var(--brand-terracotta);">
+                            <i class="fa-solid fa-bullseye text-2xl"></i>
+                            <h3 class="text-xl">設立宗旨 (Educational Goals)</h3>
+                        </div>
+                        <p class="text-sm leading-relaxed" style="color: var(--text-muted);">
+                            慈濟大學經營管理学系以「專業知能、人文素養、社會關懷、國際視野」為核心辦學指標，致力讓每位畢業生皆具備獨立分析商業問題、溝通協調與敏捷決策之能力。
+                        </p>
+                    </div>
+
+                    <div class="p-7 rounded-3xl border space-y-3 warm-card">
+                        <div class="flex items-center space-x-3 font-bold" style="color: var(--brand-amber);">
+                            <i class="fa-solid fa-compass text-2xl"></i>
+                            <h3 class="text-xl">發展定位 (Development Focus)</h3>
+                        </div>
+                        <p class="text-sm leading-relaxed" style="color: var(--text-muted);">
+                            因應 AI 數位轉型與 ESG 永續發展大趨勢，本系聚焦於「智慧營運」與「永續創新」雙軸心，透過校內特色實習場域打破傳統書本導向，實現學用無縫接軌。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Feature Cards Grid -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="warm-card rounded-2xl p-6 text-center space-y-2">
+                        <div class="w-12 h-12 mx-auto rounded-xl flex items-center justify-center text-xl font-bold" style="background-color: var(--brand-amber-light); color: var(--brand-amber);">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <h4 class="font-extrabold text-base" style="color: var(--text-main);">小班師徒制</h4>
+                        <p class="text-xs" style="color: var(--text-muted);">溫暖關懷與職涯導師輔導</p>
+                    </div>
+
+                    <div class="warm-card rounded-2xl p-6 text-center space-y-2">
+                        <div class="w-12 h-12 mx-auto rounded-xl flex items-center justify-center text-xl font-bold" style="background-color: var(--brand-peach); color: var(--brand-terracotta);">
+                            <i class="fa-solid fa-handshake"></i>
+                        </div>
+                        <h4 class="font-extrabold text-base" style="color: var(--text-main);">企業實務鏈結</h4>
+                        <p class="text-xs" style="color: var(--text-muted);">國內外多元機構實習對接</p>
+                    </div>
+
+                    <div class="warm-card rounded-2xl p-6 text-center space-y-2">
+                        <div class="w-12 h-12 mx-auto rounded-xl flex items-center justify-center text-xl font-bold" style="background-color: var(--bg-body); color: var(--brand-sunset);">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h4 class="font-extrabold text-base" style="color: var(--text-main);">敏捷創新思考</h4>
+                        <p class="text-xs" style="color: var(--text-muted);">導入專案管理與數據工具</p>
+                    </div>
+
+                    <div class="warm-card rounded-2xl p-6 text-center space-y-2">
+                        <div class="w-12 h-12 mx-auto rounded-xl flex items-center justify-center text-xl font-bold" style="background-color: #fee2e2; color: var(--brand-terracotta-dark);">
+                            <i class="fa-solid fa-earth-americas"></i>
+                        </div>
+                        <h4 class="font-extrabold text-base" style="color: var(--text-main);">永續國際視野</h4>
+                        <p class="text-xs" style="color: var(--text-muted);">ESG 企業社會責任深耕</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FACILITIES SECTION (INTERACTIVE MODAL) ==================== -->
+    <section id="facilities" class="py-20 border-b" style="background-color: var(--bg-body); border-color: var(--border-warm);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div class="space-y-2">
+                    <span class="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full border" style="background-color: var(--bg-card); border-color: var(--border-warm); color: var(--brand-terracotta);">Specialized Facilities</span>
+                    <h2 class="text-3xl font-extrabold sm:text-4xl" style="color: var(--text-main);">特色實習教室與專業場域</h2>
+                    <p class="text-sm sm:text-base" style="color: var(--text-muted);">點選以下特色教室卡片，即可開啟詳細簡介與學習亮點說明。</p>
+                </div>
+                <div class="mt-4 md:mt-0 text-xs font-bold px-4 py-2.5 rounded-xl border" style="background-color: var(--bg-card); border-color: var(--border-warm); color: var(--text-muted);">
+                    <i class="fa-solid fa-mouse-pointer mr-1.5" style="color: var(--brand-terracotta);"></i> 點擊卡片解鎖互動詳情
+                </div>
+            </div>
+
+            <!-- 5 Facility Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Room 1: 個案教學研討室 -->
+                <div onclick="openModal('case')" class="warm-card rounded-2xl p-6 cursor-pointer group">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-transform" style="background-color: var(--brand-amber-light); color: var(--brand-amber);">
+                            <i class="fa-solid fa-users-rectangle"></i>
+                        </div>
+                        <span class="px-2.5 py-1 text-[11px] font-bold rounded-md border" style="background-color: var(--bg-body); border-color: var(--border-warm); color: var(--brand-terracotta);">翻轉教育</span>
+                    </div>
+                    <h3 class="text-xl font-extrabold group-hover:opacity-80 transition-opacity" style="color: var(--text-main);">個案教學研討室</h3>
+                    <p class="text-xs font-semibold mt-0.5" style="color: var(--text-muted);">Case Study Discussion Room</p>
+                    <p class="text-xs sm:text-sm mt-3 line-clamp-2" style="color: var(--text-muted);">
+                        以翻轉教育理論設計之個案討論講堂，環狀座位促成高強度決策辯論。
+                    </p>
+                    <div class="mt-5 pt-3 border-t flex justify-between items-center text-xs font-bold" style="border-color: var(--border-warm); color: var(--brand-terracotta);">
+                        <span>查看詳細設施簡介</span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </div>
+
+                <!-- Room 2: 知足咖啡館 -->
+                <div onclick="openModal('cafe')" class="warm-card rounded-2xl p-6 cursor-pointer group">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-transform" style="background-color: var(--brand-peach); color: var(--brand-terracotta);">
+                            <i class="fa-solid fa-mug-hot"></i>
+                        </div>
+                        <span class="px-2.5 py-1 text-[11px] font-bold rounded-md border" style="background-color: var(--bg-body); border-color: var(--border-warm); color: var(--brand-amber);">外場行銷實習</span>
+                    </div>
+                    <h3 class="text-xl font-extrabold group-hover:opacity-80 transition-opacity" style="color: var(--text-main);">知足咖啡館 (實習教室)</h3>
+                    <p class="text-xs font-semibold mt-0.5" style="color: var(--text-muted);">Department Practice Lab (Café)</p>
+                    <p class="text-xs sm:text-sm mt-3 line-clamp-2" style="color: var(--text-muted);">
+                        外場行銷與餐飲經營實習場域，建置專業咖啡與服務設備，親自參與實體門市營運。
+                    </p>
+                    <div class="mt-5 pt-3 border-t flex justify-between items-center text-xs font-bold" style="border-color: var(--border-warm); color: var(--brand-terracotta);">
+                        <span>查看詳細設施簡介</span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </div>
+
+                <!-- Room 3: 智慧商店 -->
+                <div onclick="openModal('smart')" class="warm-card rounded-2xl p-6 cursor-pointer group">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-transform" style="background-color: #fed7aa; color: var(--brand-terracotta-dark);">
+                            <i class="fa-solid fa-shop"></i>
+                        </div>
+                        <span class="px-2.5 py-1 text-[11px] font-bold rounded-md border" style="background-color: var(--bg-body); border-color: var(--border-warm); color: var(--brand-terracotta-dark);">無人商店情境</span>
+                    </div>
+                    <h3 class="text-xl font-extrabold group-hover:opacity-80 transition-opacity" style="color: var(--text-main);">智慧商店</h3>
+                    <p class="text-xs font-semibold mt-0.5" style="color: var(--text-muted);">Smart Unmanned Store</p>
+                    <p class="text-xs sm:text-sm mt-3 line-clamp-2" style="color: var(--text-muted);">
+                        建置虛擬智慧零售情境，讓學生提早適應無人商店概念與 POS 消費數據收集。
+                    </p>
+                    <div class="mt-5 pt-3 border-t flex justify-between items-center text-xs font-bold" style="border-color: var(--border-warm); color: var(--brand-terracotta);">
+                        <span>查看詳細設施簡介</span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </div>
+
+                <!-- Room 4: 國際商務教室 -->
+                <div onclick="openModal('international')" class="warm-card rounded-2xl p-6 cursor-pointer group">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-transform" style="background-color: var(--bg-body); color: var(--brand-sunset);">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                        <span class="px-2.5 py-1 text-[11px] font-bold rounded-md border" style="background-color: var(--bg-body); border-color: var(--border-warm); color: var(--brand-sunset);">靜謐質感空間</span>
+                    </div>
+                    <h3 class="text-xl font-extrabold group-hover:opacity-80 transition-opacity" style="color: var(--text-main);">國際商務教室</h3>
+                    <p class="text-xs font-semibold mt-0.5" style="color: var(--text-muted);">International Business Space</p>
+                    <p class="text-xs sm:text-sm mt-3 line-clamp-2" style="color: var(--text-muted);">
+                        Quiet & High-Quality Study Space，提供安靜舒適的高質感商務研習與討論空間。
+                    </p>
+                    <div class="mt-5 pt-3 border-t flex justify-between items-center text-xs font-bold" style="border-color: var(--border-warm); color: var(--brand-terracotta);">
+                        <span>查看詳細設施簡介</span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </div>
+
+                <!-- Room 5: 簡報與溝通教室 -->
+                <div onclick="openModal('presentation')" class="warm-card rounded-2xl p-6 cursor-pointer group sm:col-span-2 lg:col-span-2">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-transform" style="background-color: var(--brand-amber-light); color: var(--brand-amber);">
+                            <i class="fa-solid fa-display"></i>
+                        </div>
+                        <span class="px-2.5 py-1 text-[11px] font-bold rounded-md border" style="background-color: var(--bg-body); border-color: var(--border-warm); color: var(--brand-amber);">影音簡報訓練</span>
+                    </div>
+                    <h3 class="text-xl font-extrabold group-hover:opacity-80 transition-opacity" style="color: var(--text-main);">簡報與溝通教室</h3>
+                    <p class="text-xs font-semibold mt-0.5" style="color: var(--text-muted);">Presentation & Pitch Lab</p>
+                    <p class="text-xs sm:text-sm mt-3 line-clamp-2" style="color: var(--text-muted);">
+                        配備專業影音簡報投影與錄播設備，提供 Pitch 簡報與溝通演練，培植職場簡報與發表演說實力。
+                    </p>
+                    <div class="mt-5 pt-3 border-t flex justify-between items-center text-xs font-bold" style="border-color: var(--border-warm); color: var(--brand-terracotta);">
+                        <span>查看詳細設施簡介</span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Warm Modal Popup Layer -->
+    <div id="facilityModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300" style="background-color: rgba(41, 37, 36, 0.45);">
+        <div id="modalBox" class="rounded-3xl max-w-lg w-full p-7 shadow-2xl transform scale-95 transition-all duration-300 relative border" style="background-color: var(--bg-modal); border-color: var(--border-warm-hover);">
+            <button onclick="closeModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full flex items-center justify-center transition-colors hover:bg-orange-200" style="background-color: var(--bg-card); color: var(--text-muted);" aria-label="Close Modal">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div id="modalContainer" class="space-y-4">
+                <!-- Content dynamically populated by Vanilla JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== CURRICULUM FILTER SECTION ==================== -->
+    <section id="curriculum" class="py-20 border-b" style="background-color: var(--bg-body-alt); border-color: var(--border-warm);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+                <span class="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full border" style="background-color: var(--bg-card); border-color: var(--border-warm); color: var(--brand-terracotta);">Curriculum Filter</span>
+                <h2 class="text-3xl font-extrabold sm:text-4xl" style="color: var(--text-main);">課程規劃與分類篩選器</h2>
+                <p class="text-sm sm:text-base" style="color: var(--text-muted);">點擊以下分類標籤，動態預覽跨域專業模組課程。</p>
+            </div>
+
+            <!-- Filter Buttons Bar -->
+            <div class="flex flex-wrap justify-center gap-2.5 sm:gap-3 mb-10">
+                <button onclick="filterCurriculum('all', this)" class="filter-btn active px-5 py-2.5 text-xs sm:text-sm font-bold rounded-full">全選課程</button>
+                <button onclick="filterCurriculum('smart-ops', this)" class="filter-btn px-5 py-2.5 text-xs sm:text-sm font-bold rounded-full">
+                    <i class="fa-solid fa-chart-pie text-xs mr-1"></i> 智慧營運課群
+                </button>
+                <button onclick="filterCurriculum('esg-mgmt', this)" class="filter-btn px-5 py-2.5 text-xs sm:text-sm font-bold rounded-full">
+                    <i class="fa-solid fa-leaf text-xs mr-1"></i> 永續創新課群
+                </button>
+                <button onclick="filterCurriculum('marketing', this)" class="filter-btn px-5 py-2.5 text-xs sm:text-sm font-bold rounded-full">
+                    <i class="fa-solid fa-bullhorn text-xs mr-1"></i> 行銷流通課群
+                </button>
+                <button onclick="filterCurriculum('internship', this)" class="filter-btn px-5 py-2.5 text-xs sm:text-sm font-bold rounded-full">
+                    <i class="fa-solid fa-briefcase text-xs mr-1"></i> 實務實習與專題
+                </button>
+            </div>
+
+            <!-- Dynamic Course Cards -->
+            <div id="curriculumGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Course Card 1 -->
+                <div class="c-card smart-ops warm-card p-6 rounded-2xl space-y-3">
+                    <div class="flex justify-between items-start">
+                        <span class="px-2.5 py-1 text-xs font-bold rounded-md" style="background-color: var(--brand-amber-light); color: var(--brand-terracotta);">智慧營運課群</span>
+                        <span class="text-xs font-semibold" style="color: var(--text-muted);">3 學分</span>
+                    </div>
+                    <h3 class="text-lg font-extrabold" style="color: var(--text-main);">管理學與 AI 智慧應用</h3>
+                    <p class="text-xs" style="color: var(--text-muted);">Principles of Management & AI Applications</p>
+                    <p class="text-xs leading-relaxed" style="color: var(--text-muted);">建立企業管理控制架構，同時學習運用生成式 AI 整理大數據與擬定行銷提案。</p>
+                </div>
+
+                <!-- Course Card 2 -->
+                <div class="c-card marketing warm-card p-6 rounded-2xl space-y-3">
+                    <div class="flex justify-between items-start">
+                        <span class="px-2.5 py-1 text-xs font-bold rounded-md" style="background-color: var(--brand-peach); color: var(--brand-terracotta-dark);">行銷流通課群</span>
+                        <span class="text-xs font-semibold" style="color: var(--text-muted);">3 學分</span>
+                    </div>
+                    <h3 class="text-lg font-extrabold" style="color: var(--text-main);">大數據與行銷管理</h3>
+                    <p class="text-xs" style="color: var(--text-muted);">Marketing Management & Data Analytics</p>
+                    <p class="text-xs leading-relaxed" style="color: var(--text-muted);">STP 策略分析、品牌定位、社群廣告投放與消費者體驗行為洞察。</p>
+                </div>
+
+                <!-- Course Card 3 -->
+                <div class="c-card esg-mgmt warm-card p-6 rounded-2xl space-y-3">
+                    <div class="flex justify-between items-start">
+                        <span class="px-2.5 py-1 text-xs font-bold rounded-md" style="background-color: #fef3c7; color: var(--brand-amber);">永續創新課群</span>
+                        <span class="text-xs font-semibold" style="color: var(--text-muted);">3 學分</span>
+                    </div>
+                    <h3 class="text-lg font-extrabold" style="color: var(--text-main);">企業社會責任與 ESG 永續管理</h3>
+                    <p class="text-xs" style="color: var(--text-muted);">CSR & ESG Sustainable Governance</p>
+                    <p class="text-xs leading-relaxed" style="color: var(--text-muted);">結合慈濟人文精神，研討商業倫理思維、CSR 報告書導讀與企業碳盤查導論。</p>
+                </div>
+
+                <!-- Course Card 4 -->
+                <div class="c-card smart-ops warm-card p-6 rounded-2xl space-y-3">
+                    <div class="flex justify-between items-start">
+                        <span class="px-2.5 py-1 text-xs font-bold rounded-md" style="background-color: var(--brand-amber-light); color: var(--brand-terracotta);">智慧營運課群</span>
+                        <span class="text-xs font-semibold" style="color: var(--text-muted);">3 學分</span>
+                    </div>
+                    <h3 class="text-lg font-extrabold" style="color: var(--text-main);">敏捷專案管理與組織行為</h3>
+                    <p class="text-xs" style="color: var(--text-muted);">Agile Project Management & Behavior</p>
+                    <p class="text-xs leading-relaxed" style="color: var(--text-muted);">探討團隊溝通、組織變革、敏捷 Scrum 專案流程與跨部會領導力。</p>
+                </div>
+
+                <!-- Course Card 5 -->
+                <div class="c-card internship warm-card p-6 rounded-2xl space-y-3">
+                    <div class="flex justify-between items-start">
+                        <span class="px-2.5 py-1 text-xs font-bold rounded-md" style="background-color: #fed7aa; color: var(--brand-terracotta-dark);">實務實習與專題</span>
+                        <span class="text-xs font-semibold" style="color: var(--text-muted);">3 學分</span>
+                    </div>
+                    <h3 class="text-lg font-extrabold" style="color: var(--text-main);">知足咖啡館實戰門市實習</h3>
+                    <p class="text-xs" style="color: var(--text-muted);">Café Management Practical Workshop</p>
+                    <p class="text-xs leading-relaxed" style="color: var(--text-muted);">於校內知足咖啡館進行真實門市經營、POS 點餐數據分析與顧客滿意度維護。</p>
+                </div>
+
+                <!-- Course Card 6 -->
+                <div class="c-card internship warm-card p-6 rounded-2xl space-y-3">
+                    <div class="flex justify-between items-start">
+                        <span class="px-2.5 py-1 text-xs font-bold rounded-md" style="background-color: #fed7aa; color: var(--brand-terracotta-dark);">實務實習與專題</span>
+                        <span class="text-xs font-semibold" style="color: var(--text-muted);">3 學分</span>
+                    </div>
+                    <h3 class="text-lg font-extrabold" style="color: var(--text-main);">經營管理 Capstone 總結專題</h3>
+                    <p class="text-xs" style="color: var(--text-muted);">Business Management Capstone Project</p>
+                    <p class="text-xs leading-relaxed" style="color: var(--text-muted);">整合四年學術與實作經驗，診斷真實企業痛點或參加全國性商業競賽展演。</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CAREER & INTERNSHIP SECTION ==================== -->
+    <section id="careers" class="py-20 border-b" style="background-color: var(--bg-body); border-color: var(--border-warm);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <span class="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full border" style="background-color: var(--bg-card); border-color: var(--border-warm); color: var(--brand-terracotta);">Careers & Development</span>
+                <h2 class="text-3xl font-extrabold sm:text-4xl" style="color: var(--text-main);">畢業發展與實習管道</h2>
+                <p class="text-sm sm:text-base" style="color: var(--text-muted);">結合特色產學合作機構，提供全方位職場體驗與就業銜接。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Career Card 1 -->
+                <div class="warm-card rounded-3xl p-7 space-y-3">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-bold" style="background-color: var(--brand-peach); color: var(--brand-terracotta);">
+                        <i class="fa-solid fa-recycle"></i>
+                    </div>
+                    <h3 class="text-xl font-extrabold" style="color: var(--text-main);">大愛感恩科技 永續實習</h3>
+                    <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);">
+                        鏈結綠色紡織與環保循環經濟企業，實習體驗永續商品研發、ESG 品牌行銷與綠色供應鏈管理。
+                    </p>
+                </div>
+
+                <!-- Career Card 2 -->
+                <div class="warm-card rounded-3xl p-7 space-y-3">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-bold" style="background-color: var(--brand-amber-light); color: var(--brand-amber);">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                    </div>
+                    <h3 class="text-xl font-extrabold" style="color: var(--text-main);">靜思書軒 人文門市經營</h3>
+                    <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);">
+                        結合全台與海外靜思書軒門市，提供連鎖門市營運實習、陳列行銷企劃與服務品質管控。
+                    </p>
+                </div>
+
+                <!-- Career Card 3 -->
+                <div class="warm-card rounded-3xl p-7 space-y-3">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-bold" style="background-color: #fed7aa; color: var(--brand-terracotta-dark);">
+                        <i class="fa-solid fa-chart-simple"></i>
+                    </div>
+                    <h3 class="text-xl font-extrabold" style="color: var(--text-main);">智慧零售與數位行銷</h3>
+                    <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);">
+                        品牌行銷企劃師、數位廣告投放專員、社群媒體經營經理、產品行銷經理 (PMM)。
+                    </p>
+                </div>
+
+                <!-- Career Card 4 -->
+                <div class="warm-card rounded-3xl p-7 space-y-3">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-bold" style="background-color: var(--bg-body); color: var(--brand-sunset);">
+                        <i class="fa-solid fa-diagram-project"></i>
+                    </div>
+                    <h3 class="text-xl font-extrabold" style="color: var(--text-main);">敏捷專案經理 (PM)</h3>
+                    <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);">
+                        敏捷專案管理師、商業數據分析師、企業數位轉型顧問、跨部門流程優化管理主管。
+                    </p>
+                </div>
+
+                <!-- Career Card 5 -->
+                <div class="warm-card rounded-3xl p-7 space-y-3">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-bold" style="background-color: var(--brand-peach); color: var(--brand-terracotta);">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <h3 class="text-xl font-extrabold" style="color: var(--text-main);">ESG 永續發展與顧問</h3>
+                    <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);">
+                        企業永續發展專員、碳盤查專案企劃、CSR 永續報告書撰寫顧問、永續供應鏈稽核員。
+                    </p>
+                </div>
+
+                <!-- Career Card 6 -->
+                <div class="warm-card rounded-3xl p-7 space-y-3">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-bold" style="background-color: var(--brand-amber-light); color: var(--brand-amber);">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-xl font-extrabold" style="color: var(--text-main);">國內外名校深造與交換</h3>
+                    <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);">
+                        推甄或考取國內外頂尖企管、經管、行銷與國際商務碩博士班，或前往姊妹校短期交換。
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FAQ SECTION (ACCORDION) ==================== -->
+    <section id="faq" class="py-20 border-b" style="background-color: var(--bg-body-alt); border-color: var(--border-warm);">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 space-y-2">
+                <span class="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full border" style="background-color: var(--bg-card); border-color: var(--border-warm); color: var(--brand-terracotta);">FAQ</span>
+                <h2 class="text-3xl font-extrabold" style="color: var(--text-main);">常見問答 (Frequently Asked Questions)</h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="rounded-2xl border overflow-hidden warm-card">
+                    <button onclick="toggleFaq(1)" class="w-full px-6 py-5 text-left font-bold hover:opacity-80 flex justify-between items-center focus:outline-none" style="color: var(--text-main);">
+                        <span class="text-sm sm:text-base">Q1. 高中生及高職生申請慈濟大學經管系有哪些管道？</span>
+                        <i id="faqIcon-1" class="fa-solid fa-chevron-down transition-transform duration-300" style="color: var(--brand-terracotta);"></i>
+                    </button>
+                    <div id="faqAnswer-1" class="hidden px-6 pb-5 text-xs sm:text-sm leading-relaxed border-t pt-4" style="border-color: var(--border-warm); color: var(--text-muted);">
+                        普通高中生可透過大學申請入學、繁星推薦與分發入學；高職同學可透過四技二專技優甄審或統測管道報考。歡迎對經營管理、智慧行銷與永續議題有熱情的同學加入！
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="rounded-2xl border overflow-hidden warm-card">
+                    <button onclick="toggleFaq(2)" class="w-full px-6 py-5 text-left font-bold hover:opacity-80 flex justify-between items-center focus:outline-none" style="color: var(--text-main);">
+                        <span class="text-sm sm:text-base">Q2. 系上提供哪些企業實習與實務訓練機會？</span>
+                        <i id="faqIcon-2" class="fa-solid fa-chevron-down transition-transform duration-300" style="color: var(--brand-terracotta);"></i>
+                    </button>
+                    <div id="faqAnswer-2" class="hidden px-6 pb-5 text-xs sm:text-sm leading-relaxed border-t pt-4" style="border-color: var(--border-warm); color: var(--text-muted);">
+                        本系除了校內「知足咖啡館」與「智慧商店」實務場域外，亦與大愛感恩科技、靜思書軒、知名連鎖零售集團及花東地方創生產業建立暑期與學期實習合作。
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="rounded-3xl border overflow-hidden warm-card">
+                    <button onclick="toggleFaq(3)" class="w-full px-6 py-5 text-left font-bold hover:opacity-80 flex justify-between items-center focus:outline-none" style="color: var(--text-main);">
+                        <span class="text-sm sm:text-base">Q3. 慈濟大學提供哪些海外交換與國際學習補助？</span>
+                        <i id="faqIcon-3" class="fa-solid fa-chevron-down transition-transform duration-300" style="color: var(--brand-terracotta);"></i>
+                    </button>
+                    <div id="faqAnswer-3" class="hidden px-6 pb-5 text-xs sm:text-sm leading-relaxed border-t pt-4" style="border-color: var(--border-warm); color: var(--text-muted);">
+                        學校與歐美日及東南亞多所知名姐妹校簽署合作協定，提供高額國際交流補助金與交換學生名額，鼓勵學生升學期間邁向國際視野。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER & CONTACT ==================== -->
+    <footer id="contact" class="pt-16 pb-12 border-t" style="background-color: var(--text-main); color: var(--text-cream); border-color: var(--brand-terracotta-dark);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 mb-12">
+                
+                <!-- Brand Info & Social Icons -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg" style="background-color: var(--brand-terracotta); color: var(--text-cream);">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <span class="text-xl font-bold">慈濟大學 經營管理學系</span>
+                    </div>
+                    <p class="text-xs opacity-80 leading-relaxed max-w-sm">
+                        Department of Business Management, Tzu Chi University.<br>
+                        深耕商管教育，融合智慧營運與永續理念，培育未來優秀領袖。
+                    </p>
+                    <div class="pt-2">
+                        <p class="text-xs font-bold uppercase tracking-wider mb-2" style="color: var(--brand-sunset);">官方社群與平台</p>
+                        <div class="flex space-x-3">
+                            <a href="https://mdm.tcu.edu.tw/" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-xl flex items-center justify-center transition-colors hover:bg-orange-600" style="background-color: rgba(255, 255, 255, 0.1);" title="官方網站">
+                                <i class="fa-solid fa-globe"></i>
+                            </a>
+                            <a href="#" class="w-9 h-9 rounded-xl flex items-center justify-center transition-colors hover:bg-orange-600" style="background-color: rgba(255, 255, 255, 0.1);" title="Facebook 粉專">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="w-9 h-9 rounded-xl flex items-center justify-center transition-colors hover:bg-orange-600" style="background-color: var(--brand-terracotta);" title="Instagram">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                            <a href="#" class="w-9 h-9 rounded-xl flex items-center justify-center transition-colors hover:bg-orange-600" style="background-color: rgba(255, 255, 255, 0.1);" title="YouTube 頻道">
+                                <i class="fa-brands fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chair Info Box -->
+                <div class="lg:col-span-3 space-y-3 p-5 rounded-2xl border" style="background-color: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.1);">
+                    <h4 class="text-xs font-bold uppercase tracking-wider flex items-center gap-2" style="color: var(--brand-sunset);">
+                        <i class="fa-solid fa-user-tie"></i> 系主任 / 聯絡窗口
+                    </h4>
+                    <div class="space-y-1.5 text-xs opacity-90">
+                        <p class="font-bold text-sm" style="color: var(--text-cream);">林珍如 主任</p>
+                        <p><i class="fa-solid fa-phone w-4" style="color: var(--brand-sunset);"></i> 電話：03-857-2677 #33126</p>
+                        <p><i class="fa-solid fa-envelope w-4" style="color: var(--brand-sunset);"></i> 信箱：lih5374@gms.tcu.edu.tw</p>
+                    </div>
+                </div>
+
+                <!-- Office Contact Details -->
+                <div class="lg:col-span-4 space-y-3">
+                    <h4 class="text-xs font-bold uppercase tracking-wider" style="color: var(--brand-sunset);">系所辦公室資訊</h4>
+                    <ul class="space-y-2.5 text-xs opacity-90">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-location-dot mt-0.5" style="color: var(--brand-sunset);"></i>
+                            <span>校址：970302 花蓮市介仁街 67 號 (介仁校區)</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-phone" style="color: var(--brand-sunset);"></i>
+                            <span>電話：03-857-2677 分機 #31682</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-envelope" style="color: var(--brand-sunset);"></i>
+                            <span>信箱：ss62@gms.tcu.edu.tw</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="pt-8 border-t text-center text-xs opacity-60 flex flex-col sm:flex-row justify-between items-center gap-4" style="border-color: rgba(255, 255, 255, 0.1);">
+                <p>© 慈濟大學 經營管理學系 Department of Business Management, TCU.</p>
+                <p>純暖色系 (Warm Colors Palette) 網頁視覺設計</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+    <script>
+        // 1. Facility Details Data
+        const facilityDetails = {
+            case: {
+                title: "個案教學研討室 (Case Study Discussion Room)",
+                badge: "翻轉教育個案討論講堂",
+                icon: "fa-users-rectangle",
+                iconBg: "var(--brand-amber-light)",
+                iconColor: "var(--brand-amber)",
+                desc: "以翻轉教育理論設計之個案討論講堂，打破傳統單向授課格局。",
+                highlights: [
+                    "環狀階梯座位，促成同儕高強度商業決策辯論與意見交流",
+                    "配備多螢幕無線投影與團隊專案簡報即時切換系統",
+                    "引進哈佛商業個案教學法，培養宏觀的企業高階決策思維"
+                ]
+            },
+            cafe: {
+                title: "知足咖啡館 (實習教室)",
+                badge: "外場行銷與餐飲經營實習",
+                icon: "fa-mug-hot",
+                iconBg: "var(--brand-peach)",
+                iconColor: "var(--brand-terracotta)",
+                desc: "知足咖啡館為系上專屬實體門市外場實習場域，建置專業餐飲與服務設施。",
+                highlights: [
+                    "讓學生在校即可親自參與外場經營、顧客服務與產品行銷",
+                    "學習門市營運、庫存管理與促銷活動策劃",
+                    "串接實體 POS 結帳系統大數據，訓練現場營運數據分析"
+                ]
+            },
+            smart: {
+                title: "智慧商店 (Smart Unmanned Store)",
+                badge: "無人商店情境與智慧零售",
+                icon: "fa-shop",
+                iconBg: "#fed7aa",
+                iconColor: "var(--brand-terracotta-dark)",
+                desc: "建置虛擬智慧零售體驗情境，讓學生提早適應無人商店的概念與技術應用。",
+                highlights: [
+                    "引導學生體驗智慧結帳、RFID 技術與顧客消費心理研究",
+                    "研討新零售商業模式與自動化供應鏈門市補貨控管",
+                    "模擬智慧零售數據分析與客流量動線優化"
+                ]
+            },
+            international: {
+                title: "國際商務教室 (International Business Space)",
+                badge: "靜謐質感研習空間",
+                icon: "fa-globe",
+                iconBg: "var(--bg-body)",
+                iconColor: "var(--brand-sunset)",
+                desc: "Quiet & High-Quality Study Space，提供安靜舒適的高質感商務研習空間。",
+                highlights: [
+                    "靜謐高質感環境，適合小組專案討論與商業個案深度研究",
+                    "支援跨國線上研討會議與雙語談判情境演練",
+                    "定期舉辦國際商務禮儀與跨國企業案例交流工作坊"
+                ]
+            },
+            presentation: {
+                title: "簡報與溝通教室 (Presentation & Pitch Lab)",
+                badge: "專業影音與簡報訓練設備",
+                icon: "fa-display",
+                iconBg: "var(--brand-amber-light)",
+                iconColor: "var(--brand-amber)",
+                desc: "具備專業影音簡報投影與動態錄播設備，提供 Pitch 提案與溝通演練。",
+                highlights: [
+                    "高畫質動態影音捕捉與錄播，提供學生自主回饋檢討",
+                    "商業 Pitch 簡報演練，培養職場簡報與口語表達自信",
+                    "模擬高階商業會議與求職面試情境訓練"
+                ]
+            }
+        };
+
+        // Modal Control Logic
+        function openModal(key) {
+            const data = facilityDetails[key];
+            if (!data) return;
+
+            const modal = document.getElementById('facilityModal');
+            const modalBox = document.getElementById('modalBox');
+            const container = document.getElementById('modalContainer');
+
+            let highlightsHtml = data.highlights.map(item => `
+                <li class="flex items-start gap-2.5 text-xs sm:text-sm text-stone-700">
+                    <i class="fa-solid fa-circle-check mt-0.5 shrink-0" style="color: var(--brand-terracotta);"></i>
+                    <span>${item}</span>
+                </li>
+            `).join('');
+
+            container.innerHTML = `
+                <div class="flex items-center space-x-3 mb-2">
+                    <div class="w-10 h-10 rounded-2xl flex items-center justify-center text-xl font-bold" style="background-color: ${data.iconBg}; color: ${data.iconColor};">
+                        <i class="fa-solid ${data.icon}"></i>
+                    </div>
+                    <span class="text-xs font-bold px-3 py-1 rounded-full border" style="background-color: var(--bg-card); border-color: var(--border-warm); color: var(--brand-terracotta);">${data.badge}</span>
+                </div>
+                <h3 class="text-2xl font-black" style="color: var(--text-main);">${data.title}</h3>
+                <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);">${data.desc}</p>
+                <div class="pt-3 border-t" style="border-color: var(--border-warm);">
+                    <h4 class="text-xs font-bold uppercase tracking-wider mb-2" style="color: var(--text-muted);">教室特色與學習亮點</h4>
+                    <ul class="space-y-2">${highlightsHtml}</ul>
+                </div>
+            `;
+
+            modal.classList.add('modal-active');
+            modalBox.classList.add('modal-box-active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('facilityModal');
+            const modalBox = document.getElementById('modalBox');
+            modal.classList.remove('modal-active');
+            modalBox.classList.remove('modal-box-active');
+        }
+
+        document.getElementById('facilityModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // 2. Curriculum Filter Logic
+        function filterCurriculum(category, btnElement) {
+            const btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(b => b.classList.remove('active'));
+            if (btnElement) btnElement.classList.add('active');
+
+            const cards = document.querySelectorAll('.c-card');
+            cards.forEach(card => {
+                if (category === 'all') {
+                    card.style.display = 'block';
+                } else if (card.classList.contains(category)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // 3. FAQ Accordion Toggle
+        function toggleFaq(id) {
+            const answer = document.getElementById(`faqAnswer-${id}`);
+            const icon = document.getElementById(`faqIcon-${id}`);
+
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                answer.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // 4. Mobile Menu Navigation
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 5. ScrollSpy Navigation Highlighting
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 120;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

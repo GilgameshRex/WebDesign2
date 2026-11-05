@@ -16,8 +16,10 @@
         :root {
             --velvet-red-dark: #2A0007;
             --velvet-red: #4A0E17;
+            --velvet-red-light: #6A1824;
             --midnight-blue-dark: #040812;
             --midnight-blue: #0A142F;
+            --midnight-blue-light: #152652;
             --ivory: #FAF5EA;
             --ivory-dark: #E6D8C3;
             
@@ -371,13 +373,14 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center center; /* 預設中間對齊 */
             display: block;
             transition: transform 0.5s ease;
         }
 
-        /* 專門給直式照片用的上方對齊樣式 */
+        /* 直式長方形相片頂部對齊 (Crop Top) */
         .baroque-photo.crop-top {
-        object-position: center top;
+            object-position: center top !important;
         }
 
         .photo-card:hover .baroque-photo {
@@ -420,6 +423,55 @@
             font-family: monospace;
         }
 
+        /* --------------------------------------------------------------------------
+           🔒 未開放 / 開發中卡片與封鎖線樣式 (Barricade Tape Styling)
+           -------------------------------------------------------------------------- */
+        .photo-card.card-locked {
+            cursor: not-allowed;
+            user-select: none;
+        }
+
+        /* 將相框內容壓暗與暗色微灰階處理 */
+        .photo-card.card-locked .royal-photo-frame {
+            filter: grayscale(60%) brightness(0.45);
+        }
+
+        /* 帝王金 × 深黑相間巴洛克警戒封鎖布條 */
+        .ribbon-barricade {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-12deg);
+            width: 125%;
+            background: repeating-linear-gradient(
+                -45deg,
+                #1A0003 0px,
+                #1A0003 15px,
+                #C5A059 15px,
+                #C5A059 30px
+            );
+            padding: 7px 0;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.95), 0 0 12px rgba(197, 160, 89, 0.5);
+            border-top: 2px solid #FAF5EA;
+            border-bottom: 2px solid #FAF5EA;
+            z-index: 10;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .ribbon-text {
+            background: #040812;
+            color: #FCF6BA;
+            padding: 3px 16px;
+            font-size: 0.88rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            border: 1px solid #D4AF37;
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+            display: inline-block;
+        }
+
         /* 卡片資訊：僅標籤與照片名稱 */
         .photo-card-body {
             display: flex;
@@ -458,14 +510,19 @@
             margin-top: auto;
         }
 
-        .photo-card:hover .preview-btn {
+        .photo-card:not(.card-locked):hover .preview-btn {
             background: var(--gold-gradient);
             color: var(--midnight-blue-dark);
             border-color: #FFF;
         }
 
+        .photo-card.card-locked .preview-btn {
+            opacity: 0.6;
+            border-color: rgba(197, 160, 89, 0.4);
+        }
+
         /* ==========================================================================
-           6. 宮廷光影彈出視窗 (Modal Lightbox)
+           6. 宮廷光影彈出視窗 (Modal Lightbox) & Toast 提示
            ========================================================================== */
         .modal-overlay {
             position: fixed;
@@ -569,6 +626,34 @@
             color: var(--midnight-blue-dark);
         }
 
+        /* 宮廷風格溫馨浮雕提示 (Toast Notification) */
+        .toast-notification {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: linear-gradient(145deg, #4A0E17 0%, #1A0004 100%);
+            border: 2px solid var(--gold-color);
+            color: #FCF6BA;
+            padding: 14px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9), 0 0 15px rgba(191, 149, 63, 0.5);
+            z-index: 3000;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast-notification.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
         /* ==========================================================================
            7. 頁尾 (Footer)
            ========================================================================== */
@@ -619,7 +704,7 @@
                 </div>
             </a>
             
-            <!-- 右上角經典「宮廷徽章按鈕」 -->
+            <!-- 右上角經典「宮廷徽章按鈕」（連結至 index.html） -->
             <a href="index.html" class="royal-badge-btn">
                 <span class="badge-icon">⚜</span>
                 <span class="badge-text">‹ 返回學院首頁</span>
@@ -641,9 +726,8 @@
         <!-- 簡約作品分類篩選 Bar -->
         <div class="filter-container">
             <button class="filter-btn active" data-filter="all">❖ 全部作品</button>
-            <button class="filter-btn" data-filter="marketing">📜 行銷管理</button>
-            <button class="filter-btn" data-filter="photo">📷 數位攝影</button>
-            <button class="filter-btn" data-filter="esg">🌿 永續 ESG</button>
+            <button class="filter-btn" data-filter="marketing">📜 品牌企劃</button>
+            <button class="filter-btn" data-filter="photo">📷 數位影像</button>
             <button class="filter-btn" data-filter="startup">💡 創新創業</button>
         </div>
     </section>
@@ -704,7 +788,7 @@
                 </div>
             </article>
 
-            <!-- 照片 3 -->
+             <!-- 照片 3 -->
             <article class="photo-card royal-border" data-category="esg" data-title="《討論者的背影》" data-img="graph/C.jpg">
                 <div class="corner-flourish cf-tl">❖</div>
                 <div class="corner-flourish cf-tr">❖</div>
@@ -729,78 +813,90 @@
                 </div>
             </article>
 
-            <!-- 照片 4 -->
-            <article class="photo-card royal-border" data-category="startup" data-title="《開發中ing》" data-img="graph/photo4.jpg">
+           <!-- 🔒 未開放卡片 5 (開發中ing...) -->
+            <article class="photo-card royal-border card-locked" data-category="marketing" data-title="開發中ing..." data-locked="true">
                 <div class="corner-flourish cf-tl">❖</div>
                 <div class="corner-flourish cf-tr">❖</div>
                 <div class="corner-flourish cf-bl">❖</div>
                 <div class="corner-flourish cf-br">❖</div>
 
+                <!-- 帝王金與黑紅斜紋封鎖線 -->
+                <div class="ribbon-barricade">
+                    <span class="ribbon-text">🔒 封鎖區域 ⚜ 開發中ing...</span>
+                </div>
+
                 <div class="royal-photo-frame">
                     <div class="frame-inner-mat">
-                        <img src="graph/photo4.jpg" alt="《開發中ing...》" class="baroque-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="placeholder-content" style="display: none;">
+                        <div class="placeholder-content">
                             <span class="placeholder-icon">📷</span>
-                            <span class="placeholder-photo-name">###</span>
-                            <span class="placeholder-link-hint">[ 相片檔案路徑預留 ]</span>
+                            <span class="placeholder-photo-name">graph/photo5.jpg</span>
+                            <span class="placeholder-link-hint">[ 未開放區域 ]</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="photo-card-body">
-                    <div class="category-tag">開發中ing...</div>
+                    <div class="category-tag">Marketing Management</div>
                     <h3 class="photo-card-title">開發中ing...</h3>
-                    <button class="preview-btn">點擊預覽相片 ⚜</button>
+                    <button class="preview-btn">尚未開放 🔒</button>
                 </div>
             </article>
 
-            <!-- 照片 5 -->
-            <article class="photo-card royal-border" data-category="photo" data-title="《開發中ing...》" data-img="graph/photo5.jpg">
+            <!-- 🔒 未開放卡片 5 (開發中ing...) -->
+            <article class="photo-card royal-border card-locked" data-category="marketing" data-title="開發中ing..." data-locked="true">
                 <div class="corner-flourish cf-tl">❖</div>
                 <div class="corner-flourish cf-tr">❖</div>
                 <div class="corner-flourish cf-bl">❖</div>
                 <div class="corner-flourish cf-br">❖</div>
 
+                <!-- 帝王金與黑紅斜紋封鎖線 -->
+                <div class="ribbon-barricade">
+                    <span class="ribbon-text">🔒 封鎖區域 ⚜ 開發中ing...</span>
+                </div>
+
                 <div class="royal-photo-frame">
                     <div class="frame-inner-mat">
-                        <img src="graph/photo5.jpg" alt="《開發中ing...》" class="baroque-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="placeholder-content" style="display: none;">
+                        <div class="placeholder-content">
                             <span class="placeholder-icon">📷</span>
-                            <span class="placeholder-photo-name">###</span>
-                            <span class="placeholder-link-hint">[ 相片檔案路徑預留 ]</span>
+                            <span class="placeholder-photo-name">graph/photo5.jpg</span>
+                            <span class="placeholder-link-hint">[ 未開放區域 ]</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="photo-card-body">
-                    <div class="category-tag">開發中ing...</div>
-                    <h3 class="photo-card-title">《開發中ing...》</h3>
-                    <button class="preview-btn">點擊預覽相片 ⚜</button>
+                    <div class="category-tag">Marketing Management</div>
+                    <h3 class="photo-card-title">開發中ing...</h3>
+                    <button class="preview-btn">尚未開放 🔒</button>
                 </div>
             </article>
 
-            <!-- 照片 6 -->
-            <article class="photo-card royal-border" data-category="marketing" data-title="《開發中ing...》" data-img="graph/photo6.jpg">
+            <!-- 🔒 未開放卡片 6 (開發中ing...) -->
+            <article class="photo-card royal-border card-locked" data-category="startup" data-title="開發中ing..." data-locked="true">
                 <div class="corner-flourish cf-tl">❖</div>
                 <div class="corner-flourish cf-tr">❖</div>
                 <div class="corner-flourish cf-bl">❖</div>
                 <div class="corner-flourish cf-br">❖</div>
 
+                <!-- 帝王金與黑紅斜紋封鎖線 -->
+                <div class="ribbon-barricade">
+                    <span class="ribbon-text">🔒 封鎖區域 ⚜ 開發中ing...</span>
+                </div>
+
                 <div class="royal-photo-frame">
                     <div class="frame-inner-mat">
-                        <img src="graph/photo6.jpg" alt="《開發中ing...》" class="baroque-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="placeholder-content" style="display: none;">
+                        <div class="placeholder-content">
                             <span class="placeholder-icon">📷</span>
-                            <span class="placeholder-photo-name">###</span>
-                            <span class="placeholder-link-hint">[ 相片檔案路徑預留 ]</span>
+                            <span class="placeholder-photo-name">graph/photo6.jpg</span>
+                            <span class="placeholder-link-hint">[ 未開放區域 ]</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="photo-card-body">
-                    <div class="category-tag">開發中ing...</div>
-                    <h3 class="photo-card-title">《開發中ing...》</h3>
-                    <button class="preview-btn">點擊預覽相片 ⚜</button>
+                    <div class="category-tag">Innovation & Startup</div>
+                    <h3 class="photo-card-title">開發中ing...</h3>
+                    <button class="preview-btn">尚未開放 🔒</button>
                 </div>
             </article>
 
@@ -843,6 +939,12 @@
         </div>
     </div>
 
+    <!-- 宮廷浮雕 Toast 提示訊息 -->
+    <div class="toast-notification" id="toastNotice">
+        <span>🔒</span>
+        <span id="toastMsg">此區塊開發中ing... 敬請期待！</span>
+    </div>
+
     <!-- ==========================================================================
          皇家頁尾 (Imperial Footer)
          ========================================================================== -->
@@ -864,7 +966,7 @@
     </footer>
 
     <!-- ==========================================================================
-         內嵌 JavaScript：動態篩選與 Modal 預覽 (含相對路徑 Image Fallback 處理)
+         內嵌 JavaScript：動態篩選、Modal 預覽與鎖定區域提示
          ========================================================================== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -897,7 +999,7 @@
                 });
             });
 
-            // 2. 宮廷 Modal 預覽與大圖自動切換
+            // 2. 宮廷 Modal 預覽與鎖定卡片提示邏輯
             const modalOverlay = document.getElementById('photoModal');
             const modalClose = document.getElementById('modalClose');
             const modalTitle = document.getElementById('modalTitle');
@@ -905,14 +1007,40 @@
             const modalFallback = document.getElementById('modalFallback');
             const modalFallbackText = document.getElementById('modalFallbackText');
             const modalPhotoLink = document.getElementById('modalPhotoLink');
+            const toastNotice = document.getElementById('toastNotice');
+
+            let toastTimer;
+            function showToast(msg) {
+                const toastMsg = document.getElementById('toastMsg');
+                if (toastMsg) toastMsg.textContent = msg;
+                toastNotice.classList.add('show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => {
+                    toastNotice.classList.remove('show');
+                }, 3000);
+            }
 
             photoCards.forEach(card => {
                 card.addEventListener('click', function() {
+                    // 若是鎖定開發中的卡片，跳出優雅提示
+                    if (this.getAttribute('data-locked') === 'true') {
+                        showToast('此區塊開發中ing... 敬請期待！');
+                        return;
+                    }
+
                     const title = this.getAttribute('data-title');
                     const imgSrc = this.getAttribute('data-img') || '#';
 
                     modalTitle.textContent = title;
                     modalPhotoLink.setAttribute('href', imgSrc);
+
+                    // 判斷原圖是否含 crop-top 屬性
+                    const innerImg = this.querySelector('.baroque-photo');
+                    if (innerImg && innerImg.classList.contains('crop-top')) {
+                        modalImg.classList.add('crop-top');
+                    } else {
+                        modalImg.classList.remove('crop-top');
+                    }
 
                     // 重設 Modal 圖片與退回機制
                     modalImg.style.display = 'block';

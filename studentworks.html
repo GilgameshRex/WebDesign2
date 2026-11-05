@@ -375,6 +375,11 @@
             transition: transform 0.5s ease;
         }
 
+        /* 專門給直式照片用的上方對齊樣式 */
+        .baroque-photo.crop-top {
+        object-position: center top;
+        }
+
         .photo-card:hover .baroque-photo {
             transform: scale(1.06);
         }
@@ -708,7 +713,7 @@
 
                 <div class="royal-photo-frame">
                     <div class="frame-inner-mat">
-                        <img src="graph/C.jpg" alt="《討論者的背影》" class="baroque-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <img src="graph/C.jpg" alt="《討論者的背影》" class="baroque-photo crop-top" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="placeholder-content" style="display: none;">
                             <span class="placeholder-icon">📷</span>
                             <span class="placeholder-photo-name">graph/C.jpg</span>

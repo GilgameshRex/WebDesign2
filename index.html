@@ -1,1131 +1,991 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>慈濟大學 經營管理學系 | Department of Business Management</title>
-    <!-- 引入古典襯線與華麗標題字體 -->
+    
+    <!-- Google Fonts 載入中文與英文字體 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Noto+Serif+TC:wght@400;600;700;900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Internal CSS (內部樣式表 - 璀璨皇家與騎士色系) -->
     <style>
-        /* ==========================================================================
-           1. 全局變數與基礎設定 (Global Variables & Reset)
-           ========================================================================== */
         :root {
-            --velvet-red-dark: #2A0007;
-            --velvet-red: #4A0E17;
-            --velvet-red-light: #6A1824;
-            --midnight-blue-dark: #040812;
-            --midnight-blue: #0A142F;
-            --midnight-blue-light: #152652;
-            --ivory: #FAF5EA;
-            --ivory-dark: #E6D8C3;
-            --parchment: #F5EBE0;
+            /* 主配色：取自圖片聖槍騎士聖潔與璀璨色彩 */
+            --bg-dark: #0b0d14;              /* 暗夜曜黑背景 */
+            --bg-card: rgba(20, 23, 36, 0.85);/* 半透明深藍灰卡片背景 */
+            --bg-card-hover: rgba(28, 33, 51, 0.95);
             
-            /* 帝王金質感漸層 (Imperial Gold Gradients) */
-            --gold-gradient: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%);
-            --gold-gradient-hover: linear-gradient(135deg, #FCF6BA 0%, #BF953F 35%, #FBF5B7 70%, #B38728 100%);
-            --gold-color: #D4AF37;
-            --gold-shadow: rgba(191, 149, 63, 0.4);
+            --gold-primary: #e6c35c;         /* 聖槍與髮絲華麗金 */
+            --gold-light: #fff0b3;           /* 璀璨金光 */
+            --gold-glow: rgba(230, 195, 92, 0.35);
+            
+            --royal-blue: #1b264f;           /* 斗篷皇家深藍 */
+            --blue-accent: #3b5299;          /* 亮藍點綴 */
+            
+            --crimson-red: #8b1528;          /* 披風飾帶深緋紅 */
+            --crimson-bright: #d92b45;
+            
+            --text-main: #f0f3fa;            /* 鎧甲白/純潔白文字 */
+            --text-muted: #9aa5c4;           /* 柔和藍灰文字 */
+            
+            --border-gold: rgba(230, 195, 92, 0.35);
+            --border-gold-bright: rgba(230, 195, 92, 0.8);
+            --shadow-glow: 0 0 25px rgba(230, 195, 92, 0.2);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--midnight-blue-dark);
-            color: var(--ivory);
-            font-family: 'Noto Serif TC', 'Times New Roman', serif;
-            line-height: 1.85;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(var(--velvet-red) 1px, transparent 0),
-                radial-gradient(var(--midnight-blue) 1px, var(--midnight-blue-dark) 0);
-            background-size: 40px 40px;
-            background-position: 0 0, 20px 20px;
-        }
-
-        /* 皇家金色文字效果 */
-        .gold-text {
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-family: 'Cinzel', 'Noto Serif TC', serif;
-            letter-spacing: 1.5px;
-            text-shadow: 0 0 12px rgba(191, 149, 63, 0.25);
-        }
-
-        /* 古典雙重金絲邊框組件 */
-        .royal-border {
+            font-family: 'Noto Sans TC', 'Roboto', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-dark);
+            line-height: 1.6;
+            scroll-behavior: smooth;
             position: relative;
-            border: 2px solid var(--gold-color);
-            box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.85),
-                inset 0 0 20px rgba(191, 149, 63, 0.2);
+            overflow-x: hidden;
         }
 
-        .royal-border::before {
-            content: '';
-            position: absolute;
-            top: 4px;
-            left: 4px;
-            right: 4px;
-            bottom: 4px;
-            border: 1px solid rgba(253, 246, 186, 0.45);
-            pointer-events: none;
-        }
-
-        /* 雕花角飾 (Corner Flourishes) */
-        .corner-flourish {
-            position: absolute;
-            width: 26px;
-            height: 26px;
-            color: var(--gold-color);
-            font-size: 20px;
-            line-height: 26px;
-            text-align: center;
-            pointer-events: none;
-            z-index: 2;
-            filter: drop-shadow(0 0 4px rgba(191, 149, 63, 0.6));
-        }
-        .cf-tl { top: -3px; left: -3px; }
-        .cf-tr { top: -3px; right: -3px; }
-        .cf-bl { bottom: -3px; left: -3px; }
-        .cf-br { bottom: -3px; right: -3px; }
-
-        /* ==========================================================================
-           2. 頂部皇家導覽列 (Imperial Navigation Bar)
-           ========================================================================== */
-        header {
-            position: sticky;
+        /* 背景畫布：漂浮粒子繪製層 */
+        #particle-canvas {
+            position: fixed;
             top: 0;
-            z-index: 1000;
-            background: linear-gradient(180deg, rgba(4, 8, 18, 0.98) 0%, rgba(10, 20, 47, 0.95) 100%);
-            border-bottom: 2px solid #B38728;
-            box-shadow: 0 6px 28px rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
         }
 
-        .nav-container {
-            max-width: 1440px;
+        /* 導覽列 Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(11, 13, 20, 0.88);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-gold);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 1px 15px var(--gold-glow);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar-container {
+            max-width: 1200px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 14px 40px;
+            padding: 0.9rem 1.5rem;
         }
 
         .brand-logo {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
             text-decoration: none;
         }
 
-        .brand-crest {
-            font-size: 32px;
-            color: var(--gold-color);
-            filter: drop-shadow(0 0 8px var(--gold-shadow));
-            line-height: 1;
+        .brand-badge {
+            background: linear-gradient(135deg, var(--royal-blue), #2b3a75);
+            color: var(--gold-primary);
+            border: 1px solid var(--gold-primary);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(230, 195, 92, 0.2);
         }
 
-        .brand-title-box {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .brand-name {
-            font-size: 1.45rem;
-            font-weight: 900;
-            line-height: 1.2;
-        }
-
-        .brand-sub {
-            font-family: 'Cinzel', serif;
-            font-size: 0.78rem;
-            letter-spacing: 2px;
-            color: var(--ivory-dark);
-            opacity: 0.88;
+        .brand-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(240, 243, 250, 0.3);
         }
 
         .nav-links {
             display: flex;
-            list-style: none;
-            gap: 32px;
+            gap: 1.8rem;
             align-items: center;
+            list-style: none;
         }
 
         .nav-links a {
-            color: var(--ivory);
             text-decoration: none;
-            font-size: 1.05rem;
-            font-weight: 600;
-            letter-spacing: 1px;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
             position: relative;
             padding: 6px 0;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a::after {
-            content: '❦';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%) scale(0);
-            font-size: 10px;
-            color: var(--gold-color);
-            transition: transform 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: #FCF6BA;
+            color: var(--gold-primary);
+            text-shadow: 0 0 8px var(--gold-glow);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+            transition: var(--transition);
         }
 
         .nav-links a:hover::after {
-            transform: translateX(-50%) scale(1);
-        }
-
-        /* --------------------------------------------------------------------------
-           本次升級重點：升級加大型「學生作品」宮廷徽章按鈕
-           -------------------------------------------------------------------------- */
-        .royal-badge-btn {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 12px 28px;              /* 加大上下與左右間距 */
-            min-width: 165px;                /* 設定適當最小寬度，保持端莊大氣 */
-            background: linear-gradient(145deg, #5C121E 0%, var(--velvet-red-dark) 70%, #1A0004 100%);
-            color: var(--ivory) !important;
-            border: 2px solid var(--gold-color);
-            border-radius: 40px;             /* 典雅橢圓巴洛克徽章風格 */
-            box-shadow: 
-                0 0 16px rgba(191, 149, 63, 0.45),
-                inset 0 0 12px rgba(253, 246, 186, 0.35),
-                0 6px 16px rgba(0, 0, 0, 0.85);
-            font-size: 1.1rem;                /* 增大字體等級 */
-            font-weight: 800 !important;
-            letter-spacing: 2px;
-            cursor: pointer;
-            overflow: hidden;
-            text-decoration: none !important;
-            white-space: nowrap;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        /* 按鈕內部圖示 */
-        .royal-badge-btn .badge-icon {
-            font-size: 1.35rem;
-            color: #FCF6BA;
-            filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.7));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-        }
-
-        /* 按鈕內部文字 */
-        .royal-badge-btn .badge-text {
-            background: linear-gradient(135deg, #FFFFFF 0%, #FCF6BA 50%, #E6D8C3 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-            line-height: 1;
-        }
-
-        /* 掃光閃耀特效 */
-        .royal-badge-btn::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -60%;
-            width: 220%;
-            height: 200%;
-            background: linear-gradient(
-                60deg,
-                transparent 30%,
-                rgba(255, 255, 255, 0.4) 50%,
-                transparent 70%
-            );
-            transform: rotate(30deg) translateY(-100%);
-            transition: transform 0.75s ease;
-        }
-
-        .royal-badge-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 
-                0 0 26px rgba(253, 246, 186, 0.8),
-                inset 0 0 16px rgba(253, 246, 186, 0.6),
-                0 10px 22px rgba(0, 0, 0, 0.95);
-            border-color: #FFF8DC;
-        }
-
-        .royal-badge-btn:hover::before {
-            transform: rotate(30deg) translateY(100%);
-        }
-
-        /* ==========================================================================
-           3. 英雄主視覺 (Hero Section - 巴洛克劇院式光影)
-           ========================================================================== */
-        .hero-section {
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 90px 20px;
-            position: relative;
-            background: 
-                radial-gradient(circle at center, rgba(74, 14, 23, 0.88) 0%, rgba(4, 8, 18, 0.96) 75%),
-                repeating-linear-gradient(45deg, rgba(179, 135, 40, 0.03) 0, rgba(179, 135, 40, 0.03) 2px, transparent 0, transparent 10px);
-        }
-
-        .hero-frame-wrapper {
-            max-width: 1050px;
             width: 100%;
-            padding: 70px 45px;
-            background: linear-gradient(135deg, rgba(10, 20, 47, 0.88) 0%, rgba(42, 0, 7, 0.88) 100%);
+        }
+
+        /* 學生作品按鈕 (緋紅+金邊華麗風格) */
+        .nav-links a.btn-works {
+            background: linear-gradient(135deg, var(--crimson-red), var(--crimson-bright));
+            color: var(--text-main);
+            padding: 7px 18px;
+            border-radius: 20px;
+            font-weight: 700;
+            border: 1px solid var(--gold-primary);
+            box-shadow: 0 0 12px rgba(217, 43, 69, 0.4), inset 0 0 8px rgba(256, 256, 256, 0.2);
+        }
+
+        .nav-links a.btn-works:hover {
+            background: linear-gradient(135deg, var(--crimson-bright), #f03e56);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(230, 195, 92, 0.6);
+        }
+
+        .nav-links a.btn-works::after {
+            display: none;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: 1px solid var(--gold-primary);
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 1.3rem;
+            color: var(--gold-primary);
+            cursor: pointer;
+        }
+
+        /* Hero 形象視覺區 */
+        .hero-section {
+            padding-top: 160px;
+            padding-bottom: 100px;
+            background: 
+                linear-gradient(rgba(11, 13, 20, 0.78), rgba(11, 13, 20, 0.85)),
+                url('D.jpg') no-repeat center center;
+            background-size: cover;
+            color: var(--text-main);
             text-align: center;
             position: relative;
-            backdrop-filter: blur(12px);
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-gold);
+            z-index: 1;
         }
 
-        .hero-emblem {
-            font-size: 55px;
-            margin-bottom: 20px;
-            display: inline-block;
-            color: var(--gold-color);
-            filter: drop-shadow(0 0 16px rgba(191, 149, 63, 0.75));
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+            box-shadow: 0 0 15px var(--gold-primary);
         }
 
-        .hero-subtitle-top {
-            font-family: 'Cinzel', serif;
-            font-size: 1.15rem;
-            letter-spacing: 5px;
-            color: var(--ivory-dark);
-            margin-bottom: 12px;
+        .hero-content {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-subtitle {
+            font-family: 'Cinzel', 'Noto Sans TC', serif;
             text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.95rem;
+            color: var(--gold-primary);
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(230, 195, 92, 0.4);
         }
 
         .hero-title {
-            font-size: 3.4rem;
-            font-weight: 900;
-            line-height: 1.25;
-            margin-bottom: 22px;
-        }
-
-        .hero-divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            margin: 28px auto;
-            width: 75%;
-        }
-
-        .hero-divider-line {
-            height: 2px;
-            flex-grow: 1;
-            background: linear-gradient(90deg, transparent, var(--gold-color), transparent);
-        }
-
-        .hero-slogan {
-            font-size: 1.35rem;
-            color: var(--ivory);
-            max-width: 780px;
-            margin: 0 auto 45px auto;
-            font-weight: 400;
-            letter-spacing: 1px;
-            line-height: 1.9;
-        }
-
-        .hero-cta-group {
-            display: flex;
-            gap: 25px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary-royal {
-            padding: 15px 38px;
-            background: var(--gold-gradient);
-            color: var(--midnight-blue-dark);
-            font-weight: 900;
-            font-size: 1.1rem;
-            text-decoration: none;
-            border-radius: 4px;
-            box-shadow: 0 5px 22px rgba(191, 149, 63, 0.45);
-            transition: all 0.3s ease;
-            letter-spacing: 1.5px;
-            border: 1px solid #FFF;
-        }
-
-        .btn-primary-royal:hover {
-            background: var(--gold-gradient-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 32px rgba(253, 246, 186, 0.65);
-        }
-
-        .btn-secondary-royal {
-            padding: 15px 38px;
-            background: transparent;
-            color: var(--ivory);
+            font-size: 2.9rem;
             font-weight: 700;
-            font-size: 1.1rem;
+            margin-bottom: 1.4rem;
+            line-height: 1.25;
+            background: linear-gradient(180deg, #ffffff 30%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.8));
+        }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 2.2rem;
+            font-weight: 300;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 6px;
             text-decoration: none;
-            border-radius: 4px;
-            border: 2px solid var(--gold-color);
-            box-shadow: inset 0 0 10px rgba(191, 149, 63, 0.2);
-            transition: all 0.3s ease;
-            letter-spacing: 1.5px;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-block;
+            letter-spacing: 0.5px;
         }
 
-        .btn-secondary-royal:hover {
-            background: rgba(191, 149, 63, 0.18);
-            color: #FCF6BA;
-            border-color: #FCF6BA;
+        .btn-primary {
+            background: linear-gradient(135deg, #c5a038, var(--gold-primary));
+            color: #0b0d14;
+            font-weight: 700;
+            box-shadow: 0 0 15px var(--gold-glow);
+            border: 1px solid var(--gold-light);
         }
 
-        /* ==========================================================================
-           4. 通用區塊標頭與排版 (Section Headers & Global Containers)
-           ========================================================================== */
-        section {
-            padding: 100px 20px;
-            max-width: 1320px;
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--gold-light), #e6c35c);
+            box-shadow: 0 0 25px rgba(230, 195, 92, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--border-gold-bright);
+            color: var(--gold-primary);
+            background: rgba(27, 38, 79, 0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        .btn-outline:hover {
+            background: var(--royal-blue);
+            color: var(--text-main);
+            box-shadow: 0 0 15px rgba(59, 82, 153, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* 通用區塊樣式 */
+        .section {
+            padding: 90px 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 75px;
-            position: relative;
-        }
-
-        .section-icon {
-            font-size: 34px;
-            color: var(--gold-color);
-            margin-bottom: 6px;
+            margin-bottom: 55px;
         }
 
         .section-title {
-            font-size: 2.6rem;
-            font-weight: 900;
-            margin-bottom: 10px;
-        }
-
-        .section-subtitle {
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            color: var(--ivory-dark);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        .section-ornament {
-            font-size: 18px;
-            color: var(--gold-color);
-            margin-top: 15px;
-            letter-spacing: 10px;
-        }
-
-        /* ==========================================================================
-           5. 區塊 1：皇室敕令 ── 系所宗旨與願景 (About & Vision)
-           ========================================================================== */
-        .parchment-card {
-            background: linear-gradient(145deg, #FAF5EA 0%, #E6D8C3 100%);
-            color: #1A0D00;
-            padding: 65px;
-            border-radius: 2px;
-            box-shadow: 
-                0 22px 55px rgba(0, 0, 0, 0.95),
-                inset 0 0 35px rgba(139, 69, 19, 0.22);
-            border: 3px double #8B5A2B;
-            position: relative;
-            margin-bottom: 40px;
-        }
-
-        .parchment-watermark {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 230px;
-            color: rgba(139, 69, 19, 0.04);
-            pointer-events: none;
-            font-family: 'Cinzel', serif;
-        }
-
-        .parchment-header {
-            font-size: 1.9rem;
-            font-weight: 900;
-            color: #4A0E17;
-            text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #8B5A2B;
-            padding-bottom: 16px;
-        }
-
-        .parchment-body {
-            font-size: 1.18rem;
-            line-height: 2.15;
-            text-align: justify;
-            color: #2C1802;
-        }
-
-        .parchment-quotes {
-            margin-top: 35px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-            gap: 25px;
-        }
-
-        .quote-box {
-            border-left: 4px solid #4A0E17;
-            padding: 16px 22px;
-            background: rgba(255, 255, 255, 0.45);
-        }
-
-        .quote-box h4 {
-            color: #4A0E17;
-            font-size: 1.15rem;
-            margin-bottom: 6px;
-        }
-
-        /* ==========================================================================
-           6. 區塊 2：帝國基石 ── 四大辦學特色 (Four Pillars Chiaroscuro Cards)
-           ========================================================================== */
-        .pillars-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
-            gap: 35px;
-        }
-
-        .pillar-card {
-            background: linear-gradient(165deg, var(--midnight-blue) 0%, var(--midnight-blue-dark) 100%);
-            padding: 48px 32px;
-            position: relative;
-            transition: all 0.4s ease;
-            border: 1px solid rgba(191, 149, 63, 0.4);
-            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.75);
-        }
-
-        .pillar-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--gold-color);
-            box-shadow: 
-                0 22px 45px rgba(0, 0, 0, 0.95),
-                0 0 28px rgba(191, 149, 63, 0.35);
-        }
-
-        .pillar-icon {
-            font-size: 44px;
-            margin-bottom: 25px;
-            display: inline-block;
-            color: var(--gold-color);
-        }
-
-        .pillar-title {
-            font-size: 1.45rem;
+            font-size: 2.2rem;
+            color: var(--gold-primary);
             font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--ivory);
-            border-bottom: 1px dashed rgba(191, 149, 63, 0.4);
-            padding-bottom: 12px;
+            margin-bottom: 8px;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 12px var(--gold-glow);
         }
 
-        .pillar-desc {
-            font-size: 1rem;
-            color: var(--ivory-dark);
-            line-height: 1.85;
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+            margin: 12px auto 0;
+            box-shadow: 0 0 8px var(--gold-primary);
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            font-family: 'Cinzel', serif;
+        }
+
+        /* 系所簡介 Grid 卡片 */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .about-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            padding: 38px;
+            border-radius: 12px;
+            border: 1px solid var(--border-gold);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--gold-primary), var(--royal-blue));
+        }
+
+        .about-card:hover {
+            border-color: var(--border-gold-bright);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-4px);
+        }
+
+        .about-card h3 {
+            font-size: 1.45rem;
+            color: var(--gold-primary);
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+
+        .about-card p {
+            color: var(--text-main);
+            margin-bottom: 15px;
+            font-size: 1.02rem;
             opacity: 0.9;
         }
 
-        /* ==========================================================================
-           7. 區塊 3：法典級課程體系 (Curriculum Tracks)
-           ========================================================================== */
-        .curriculum-container {
-            display: flex;
-            flex-direction: column;
-            gap: 32px;
+        /* 本系核心特色 Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
         }
 
-        .curriculum-row {
-            background: linear-gradient(90deg, rgba(74, 14, 23, 0.75) 0%, rgba(10, 20, 47, 0.85) 100%);
-            border: 2px solid var(--gold-color);
-            padding: 42px;
-            display: grid;
-            grid-template-columns: 290px 1fr;
-            gap: 40px;
-            align-items: center;
-            box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.65);
+        .feature-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            padding: 35px 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border-gold);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            transition: var(--transition);
+            text-align: center;
             position: relative;
         }
 
-        .track-badge {
-            text-align: center;
-            border-right: 2px solid rgba(191, 149, 63, 0.4);
-            padding-right: 30px;
+        .feature-card:hover {
+            transform: translateY(-8px);
+            background: var(--bg-card-hover);
+            border-color: var(--gold-primary);
+            box-shadow: 0 10px 30px rgba(230, 195, 92, 0.25);
         }
 
-        .track-number {
-            font-family: 'Cinzel', serif;
-            font-size: 3.6rem;
-            font-weight: 900;
-            line-height: 1;
+        .feature-icon {
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, var(--royal-blue), #101633);
+            color: var(--gold-primary);
+            border: 1px solid var(--border-gold-bright);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0 auto 22px;
+            box-shadow: 0 0 15px rgba(230, 195, 92, 0.2);
+        }
+
+        .feature-card h4 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* 核心能力與培育目標 Tab */
+        .tabs-container {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            border: 1px solid var(--border-gold);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        .tab-buttons {
+            display: flex;
+            background: rgba(11, 13, 20, 0.6);
+            border-bottom: 1px solid var(--border-gold);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 18px;
+            border: none;
+            background: none;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab-btn:hover {
+            color: var(--gold-primary);
+        }
+
+        .tab-btn.active {
+            background: var(--bg-card);
+            color: var(--gold-primary);
+            border-bottom: 3px solid var(--gold-primary);
+            text-shadow: 0 0 8px var(--gold-glow);
+        }
+
+        .tab-content {
+            padding: 40px;
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .goals-list {
+            list-style: none;
+        }
+
+        .goals-list li {
+            position: relative;
+            padding-left: 32px;
+            margin-bottom: 18px;
+            font-size: 1.02rem;
+            color: var(--text-main);
+        }
+
+        .goals-list li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: var(--gold-primary);
+            font-size: 1.1rem;
+            text-shadow: 0 0 8px var(--gold-primary);
+        }
+
+        /* 實體教室設施 */
+        .facility-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+        }
+
+        .facility-item {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            border: 1px solid var(--border-gold);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            transition: var(--transition);
+        }
+
+        .facility-item:hover {
+            border-color: var(--gold-primary);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-4px);
+        }
+
+        .facility-body {
+            padding: 28px;
+        }
+
+        .facility-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--royal-blue), #2b3a75);
+            color: var(--gold-primary);
+            border: 1px solid var(--border-gold);
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .facility-body h4 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .facility-body p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* 頁尾 Footer */
+        .footer {
+            background: #07080d;
+            border-top: 1px solid var(--border-gold);
+            color: var(--text-muted);
+            padding: 65px 1.5rem 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-info h3 {
+            color: var(--gold-primary);
+            margin-bottom: 15px;
+            font-size: 1.35rem;
+            text-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        .footer-info p {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .footer-links h4, .footer-contact h4 {
+            color: var(--text-main);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            border-left: 3px solid var(--gold-primary);
+            padding-left: 10px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
             margin-bottom: 10px;
         }
 
-        .track-name {
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: var(--ivory);
-        }
-
-        .course-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 16px;
-        }
-
-        .course-tag {
-            background: rgba(4, 8, 18, 0.75);
-            border: 1px solid var(--gold-color);
-            color: var(--ivory-dark);
-            padding: 7px 18px;
-            border-radius: 20px;
-            font-size: 0.95rem;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-        }
-
-        /* ==========================================================================
-           8. 區塊 4：未來展望與成就領域 (Future & Career Achievements)
-           ========================================================================== */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-
-        .stat-card {
-            background: rgba(10, 20, 47, 0.92);
-            border: 2px double var(--gold-color);
-            padding: 38px 20px;
-            text-align: center;
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.75);
-        }
-
-        .stat-number {
-            font-family: 'Cinzel', serif;
-            font-size: 3.2rem;
-            font-weight: 900;
-            margin-bottom: 6px;
-        }
-
-        .stat-label {
-            font-size: 1.08rem;
-            color: var(--ivory-dark);
-            letter-spacing: 1px;
-        }
-
-        .career-blueprint {
-            background: linear-gradient(135deg, rgba(42, 0, 7, 0.92) 0%, rgba(10, 20, 47, 0.92) 100%);
-            padding: 55px;
-            border: 1px solid var(--gold-color);
-            box-shadow: inset 0 0 35px rgba(191, 149, 63, 0.28);
-        }
-
-        .career-title {
-            text-align: center;
-            font-size: 1.7rem;
-            margin-bottom: 38px;
-            color: var(--gold-color);
-        }
-
-        .career-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            list-style: none;
-        }
-
-        .career-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            background: rgba(4, 8, 18, 0.65);
-            padding: 16px 22px;
-            border-left: 4px solid var(--gold-color);
-        }
-
-        .career-item-icon {
-            font-size: 22px;
-            color: var(--gold-color);
-        }
-
-        /* ==========================================================================
-           9. 皇家頁尾 (Imperial Footer)
-           ========================================================================== */
-        footer {
-            background: var(--midnight-blue-dark);
-            border-top: 3px double var(--gold-color);
-            padding: 75px 20px 45px 20px;
-            position: relative;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 32px;
-        }
-
-        .footer-logo {
-            font-size: 2.1rem;
-            font-weight: 900;
-        }
-
-        .footer-divider {
-            color: var(--gold-color);
-            letter-spacing: 15px;
-            font-size: 1.25rem;
-        }
-
-        .footer-info {
-            font-size: 0.98rem;
-            color: var(--ivory-dark);
-            line-height: 2;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 28px;
-            list-style: none;
-        }
-
         .footer-links a {
-            color: var(--ivory);
+            color: var(--text-muted);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: var(--transition);
         }
 
         .footer-links a:hover {
-            color: var(--gold-color);
+            color: var(--gold-primary);
+            text-shadow: 0 0 8px var(--gold-glow);
         }
 
         .copyright {
-            font-size: 0.88rem;
-            color: rgba(250, 245, 234, 0.5);
-            margin-top: 20px;
-            font-family: 'Cinzel', serif;
+            border-top: 1px solid rgba(230, 195, 92, 0.15);
+            padding-top: 25px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #64708a;
         }
 
-        /* ==========================================================================
-           10. 響應式調整 (Responsive Design)
-           ========================================================================== */
-        @media (max-width: 992px) {
-            .hero-title { font-size: 2.5rem; }
-            .curriculum-row { grid-template-columns: 1fr; text-align: center; }
-            .track-badge { border-right: none; border-bottom: 2px solid rgba(191, 149, 63, 0.4); padding-right: 0; padding-bottom: 20px; }
-            .nav-links { display: none; }
-        }
+        /* 響應式 RWD 調整 */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.1rem;
+            }
 
-        @media (max-width: 600px) {
-            .hero-title { font-size: 1.9rem; }
-            .hero-frame-wrapper { padding: 45px 22px; }
-            .parchment-card { padding: 35px 22px; }
-            .section-title { font-size: 1.9rem; }
-            .royal-badge-btn { padding: 10px 20px; min-width: auto; font-size: 1rem; }
-        }
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
 
-        /* 動畫 Reveal 效果 */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
+            .mobile-menu-btn {
+                display: block;
+            }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(11, 13, 20, 0.96);
+                border-bottom: 1px solid var(--border-gold);
+                flex-direction: column;
+                padding: 1.5rem;
+                gap: 1.2rem;
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- ==========================================================================
-         導覽列 (Sticky Navigation Bar)
-         ========================================================================== -->
-    <header>
-        <div class="nav-container">
+    <!-- 全螢幕漂浮粒子畫布 (Canvas) -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- 導覽列 Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
             <a href="#" class="brand-logo">
-                <span class="brand-crest">⚜</span>
-                <div class="brand-title-box">
-                    <span class="brand-name gold-text">慈濟大學 經營管理學系</span>
-                    <span class="brand-sub">DEPARTMENT OF BUSINESS MANAGEMENT</span>
-                </div>
+                <span class="brand-badge">慈濟大學</span>
+                <span class="brand-title">經營管理學系</span>
             </a>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#about">系所宗旨</a></li>
-                    <li><a href="#features">辦學特色</a></li>
-                    <li><a href="#curriculum">法典課程</a></li>
-                    <li><a href="#future">未來展望</a></li>
-                    <li>
-                        <!-- 擴充按鈕：加大版「學生作品」宮廷徽章按鈕 -->
-                        <a href="studentworks.html" class="royal-badge-btn">
-                            <span class="badge-icon">⚜</span>
-                            <span class="badge-text">學生作品</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">系所簡介</a></li>
+                <li><a href="#features">本系特色</a></li>
+                <li><a href="#goals">培育目標</a></li>
+                <li><a href="#facilities">專業設施</a></li>
+                <li><a href="#contact">聯絡資訊</a></li>
+                <li><a href="studentworks.html" class="btn-works">學生作品</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero 形象視覺區 -->
+    <header class="hero-section">
+        <div class="hero-content">
+            <div class="hero-subtitle">Department of Business Management | Tzu Chi University</div>
+            <h1 class="hero-title">培育兼具AI應用與人文素養的<br>智慧管理人才</h1>
+            <p class="hero-desc">結合「跨域、智慧、永續、實務」四大主軸，引導學生接軌產業趨勢，打造新世代商業決策力與領導實力。</p>
+            <div class="hero-btns">
+                <a href="#about" class="btn btn-primary">探索系所簡介</a>
+                <a href="studentworks.html" class="btn btn-outline">瀏覽學生作品</a>
+            </div>
         </div>
     </header>
 
-    <!-- ==========================================================================
-         英雄主視覺 (Hero Section)
-         ========================================================================== -->
-    <section class="hero-section">
-        <div class="hero-frame-wrapper royal-border">
-            <!-- 四角金絲雕花裝飾 -->
-            <div class="corner-flourish cf-tl">❖</div>
-            <div class="corner-flourish cf-tr">❖</div>
-            <div class="corner-flourish cf-bl">❖</div>
-            <div class="corner-flourish cf-br">❖</div>
+    <!-- 區塊一：系所簡介 -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">系所簡介</h2>
+                <p class="section-desc">Department Overview</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>系所發展與沿革</h3>
+                    <p>慈濟大學智慧永續管理學院經營管理學系（原行銷與流通管理系／國際服務產業管理學位學程整合），因應全球產業數位轉型與永續發展趨勢，致力於發展融合創新經營與社會責任的專業教學體系。</p>
+                    <p>本系深耕東台灣並與全球產業連結，著重將理論實踐於企業創新、觀光行銷、智慧無人零售與社會企業營運之中。</p>
+                </div>
+                <div class="about-card">
+                    <h3>辦學理念與願景</h3>
+                    <p>我們以「以人為本」的心服務為核心精神，強調學生在具備嚴謹商業知識的同時，亦擁有高尚的人文品格、社會關懷與跨國溝通能力。</p>
+                    <p>透過實作專題、企業實習與國際交流，培育能在快速變動的市場中精準決策、靈活應變的商管領導人才。</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <div class="hero-emblem">⚜</div>
-            <div class="hero-subtitle-top">Royal Citadel of Sustainable Leadership</div>
-            <h1 class="hero-title gold-text">慈濟大學 經營管理學系</h1>
+    <!-- 區塊二：本系特色 -->
+    <section id="features" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">本系核心特色</h2>
+                <p class="section-desc">Four Key Advantages</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">AI</div>
+                    <h4>AI 與大數據應用</h4>
+                    <p>導入最新生成式 AI、商業智慧（BI）與數據分析課程，培育學生掌握趨勢與科技行銷工具。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">ESG</div>
+                    <h4>永續與企業責任</h4>
+                    <p>結合 ESG 理念與永續經營管理，培養具備綠色經濟與社會責任視野的現代管理者。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">實踐</div>
+                    <h4>產學實務與實習</h4>
+                    <p>推動多元企業個案研討與無人商店實作體驗，達成畢業即能學用合一的無縫接軌。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">人文</div>
+                    <h4>慈濟人文與博雅</h4>
+                    <p>融合慈濟人文精神，建立「聽、溝通、擔責、謙卑」四項核心領導品質與跨域競爭力。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 區塊三：教育目標與核心能力 -->
+    <section id="goals" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">培育目標與能力</h2>
+                <p class="section-desc">Education Goals & Competencies</p>
+            </div>
             
-            <div class="hero-divider">
-                <div class="hero-divider-line"></div>
-                <span style="color: var(--gold-color);">❦</span>
-                <div class="hero-divider-line"></div>
-            </div>
-
-            <p class="hero-slogan">
-                傳承永續商道思維 ‧ 締造帝國前瞻領導力<br>
-                融入倫理關懷與智慧數據，打造立足全球的高階商管精英殿堂
-            </p>
-
-            <div class="hero-cta-group">
-                <a href="#curriculum" class="btn-primary-royal">閱讀學院法典</a>
-                <a href="#features" class="btn-secondary-royal">探索四大特色</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==========================================================================
-         區塊 1：皇室敕令 ── 系所宗旨與願景 (About & Vision)
-         ========================================================================== -->
-    <section id="about" class="reveal">
-        <div class="section-header">
-            <div class="section-icon">📜</div>
-            <h2 class="section-title gold-text">皇室敕令 ‧ 系所宗旨</h2>
-            <div class="section-subtitle">Imperial Decree & Academic Vision</div>
-            <div class="section-ornament">⚜ ─── ❦ ─── ⚜</div>
-        </div>
-
-        <div class="parchment-card">
-            <div class="parchment-watermark">TCU</div>
-            <h3 class="parchment-header">永續經營 ‧ 人文引航 ‧ 卓越管理</h3>
-            <div class="parchment-body">
-                慈濟大學經營管理學系立基於頂尖學術視野與利他倫理精神。我們深信，真正的商管領袖不僅具備精準的市場洞察力與決策智慧，更懷抱對社會與環境的深切關懷。本系致力於培育兼具「人文同理心」、「永續 ESG 治理能力」與「國際跨域競爭力」的現代企業將才。
-            </div>
-
-            <div class="parchment-quotes">
-                <div class="quote-box">
-                    <h4>❖ 人文利他精神</h4>
-                    <p>將社會責任與企業倫理內化為商業決策的核心基石。</p>
+            <div class="tabs-container">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="openTab(event, 'tab-goals')">教育目標</button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-competencies')">核心能力</button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-careers')">未來發展</button>
                 </div>
-                <div class="quote-box">
-                    <h4>❖ 永續 ESG 視野</h4>
-                    <p>因應全球綠色轉型，引領企業達成環境與經濟雙贏。</p>
+                
+                <div id="tab-goals" class="tab-content active">
+                    <ul class="goals-list">
+                        <li>培育具備行銷企劃、數位營運與無人流通專業之管理人才。</li>
+                        <li>深化 AI 工具應用與商務數據分析能力，落實智慧商業決策。</li>
+                        <li>融入 ESG 與慈濟人文思維，強調以人為本與社會企業服務精神。</li>
+                        <li>強化團隊溝通、職場倫理與跨領域適應實力。</li>
+                    </ul>
                 </div>
-                <div class="quote-box">
-                    <h4>❖ 智慧數據決策</h4>
-                    <p>掌握 AI 與 Big Data 分析工具，掌控數位時代商業先機。</p>
+
+                <div id="tab-competencies" class="tab-content">
+                    <ul class="goals-list">
+                        <li><strong>經營企劃力：</strong>掌握企業營運、財務管理與市場洞察分析能力。</li>
+                        <li><strong>數位科技力：</strong>具備AI數據工具、雲端應用與電子商務操作實力。</li>
+                        <li><strong>溝通領導力：</strong>具備博雅領導能力、團隊協調與跨文化包容力。</li>
+                        <li><strong>人文永續力：</strong>展現職場倫理、環境永續感度與社會關懷意涵。</li>
+                    </ul>
+                </div>
+
+                <div id="tab-careers" class="tab-content">
+                    <ul class="goals-list">
+                        <li><strong>數位行銷／AI應用企劃員：</strong>數據分析師、社群行銷專員、品牌企劃。</li>
+                        <li><strong>連鎖與流通營運主管：</strong>門市管理專員、供應鏈管理、無人商店系統營運。</li>
+                        <li><strong>永續 ESG 顧問專員：</strong>企業社會責任企劃、永續發展推動專員。</li>
+                        <li><strong>國內外研究所進修：</strong>企業管理、行銷學、數據科學、資訊管理等相關領域。</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ==========================================================================
-         區塊 2：帝國基石 ── 四大辦學特色 (Four Pillars)
-         ========================================================================== -->
-    <section id="features" class="reveal">
-        <div class="section-header">
-            <div class="section-icon">🏛</div>
-            <h2 class="section-title gold-text">帝國基石 ‧ 四大辦學特色</h2>
-            <div class="section-subtitle">Four Imperial Pillars of Academic Excellence</div>
-            <div class="section-ornament">⚜ ─── ❦ ─── ⚜</div>
-        </div>
-
-        <div class="pillars-grid">
-            <div class="pillar-card royal-border">
-                <div class="corner-flourish cf-tl">❖</div>
-                <div class="corner-flourish cf-br">❖</div>
-                <div class="pillar-icon">🌐</div>
-                <h3 class="pillar-title">跨國雙聯雙學位</h3>
-                <p class="pillar-desc">
-                    與歐美知名高等府邸締結學術盟約，提供「2+2」與「3+1」雙聯學位計畫，讓學子躍升國際舞台，汲取世界頂尖學院精華。
-                </p>
+    <!-- 區塊四：專業實體教室設施 -->
+    <section id="facilities" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">專業教學設施</h2>
+                <p class="section-desc">Learning Facilities</p>
             </div>
-
-            <div class="pillar-card royal-border">
-                <div class="corner-flourish cf-tl">❖</div>
-                <div class="corner-flourish cf-br">❖</div>
-                <div class="pillar-icon">🌿</div>
-                <h3 class="pillar-title">永續 ESG 企業治理</h3>
-                <p class="pillar-desc">
-                    率先整合綠色金融、碳盤查實務與企業永續報告書撰寫，培訓符合國際溫室氣體盤查與碳驗證標準的 ESG 永續管理師。
-                </p>
-            </div>
-
-            <div class="pillar-card royal-border">
-                <div class="corner-flourish cf-tl">❖</div>
-                <div class="corner-flourish cf-br">❖</div>
-                <div class="pillar-icon">💡</div>
-                <h3 class="pillar-title">創新創業實戰特訓</h3>
-                <p class="pillar-desc">
-                    打造皇室圓桌創客工坊，輔以業界高階經理人導師制，直攻全國商業競賽與企業育成種子基金。
-                </p>
-            </div>
-
-            <div class="pillar-card royal-border">
-                <div class="corner-flourish cf-tl">❖</div>
-                <div class="corner-flourish cf-br">❖</div>
-                <div class="pillar-icon">📊</div>
-                <h3 class="pillar-title">智慧商務與 AI 數據</h3>
-                <p class="pillar-desc">
-                    建置商業智慧 (BI) 與數據挖掘實驗室，將 Python、PowerBI 及生成式 AI 應用融入行銷與供應鏈決策。
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==========================================================================
-         區塊 3：法典級課程體系 (Curriculum System)
-         ========================================================================== -->
-    <section id="curriculum" class="reveal">
-        <div class="section-header">
-            <div class="section-icon">⚔</div>
-            <h2 class="section-title gold-text">法典級課程體系</h2>
-            <div class="section-subtitle">Imperial Academic Curriculum Modules</div>
-            <div class="section-ornament">⚜ ─── ❦ ─── ⚜</div>
-        </div>
-
-        <div class="curriculum-container">
-            <div class="curriculum-row">
-                <div class="track-badge">
-                    <div class="track-number gold-text">I</div>
-                    <div class="track-name">基礎商管法典</div>
-                </div>
-                <div>
-                    <h3 style="color: var(--gold-color); font-size: 1.3rem; margin-bottom: 10px;">Foundation & Core Management Track</h3>
-                    <p style="color: var(--ivory-dark); margin-bottom: 15px;">築牢帝國領袖的商業基石，掌握企業運籌的核心邏輯與財務脈動。</p>
-                    <div class="course-tags">
-                        <span class="course-tag">組織行為學</span>
-                        <span class="course-tag">財務管理學</span>
-                        <span class="course-tag">行銷管理實務</span>
-                        <span class="course-tag">管理會計學</span>
-                        <span class="course-tag">策略管理專題</span>
+            <div class="facility-grid">
+                <div class="facility-item">
+                    <div class="facility-body">
+                        <span class="facility-tag">實務演練</span>
+                        <h4>經營管理學系實習教室</h4>
+                        <p>設有無人商店體驗區與智慧零售體驗設備，提供學生親身操作新零售經營模式與流通流程。</p>
                     </div>
                 </div>
-            </div>
-
-            <div class="curriculum-row">
-                <div class="track-badge">
-                    <div class="track-number gold-text">II</div>
-                    <div class="track-name">永續經營學程</div>
-                </div>
-                <div>
-                    <h3 style="color: var(--gold-color); font-size: 1.3rem; margin-bottom: 10px;">Sustainable ESG & Ethics Track</h3>
-                    <p style="color: var(--ivory-dark); margin-bottom: 15px;">融合企業社會責任與國際標準，引領企業走向淨零碳排與永續發展。</p>
-                    <div class="course-tags">
-                        <span class="course-tag">企業倫理與 CSR</span>
-                        <span class="course-tag">ESG 永續報告書實務</span>
-                        <span class="course-tag">綠色供應鏈管理</span>
-                        <span class="course-tag">碳資產管理與金融</span>
+                <div class="facility-item">
+                    <div class="facility-body">
+                        <span class="facility-tag">個案研討</span>
+                        <h4>個案教學研討室</h4>
+                        <p>專為哈佛個案教學模式設計的互動討論空間，培養學生即時表達、思辨與決策能力。</p>
                     </div>
                 </div>
-            </div>
-
-            <div class="curriculum-row">
-                <div class="track-badge">
-                    <div class="track-number gold-text">III</div>
-                    <div class="track-name">智慧數據學程</div>
-                </div>
-                <div>
-                    <h3 style="color: var(--gold-color); font-size: 1.3rem; margin-bottom: 10px;">Smart Business & Analytics Track</h3>
-                    <p style="color: var(--ivory-dark); margin-bottom: 15px;">結合數據分析與前瞻科技，驅動企業經營策略之數位轉型。</p>
-                    <div class="course-tags">
-                        <span class="course-tag">商業數據分析 (Python)</span>
-                        <span class="course-tag">數位行銷與電子商務</span>
-                        <span class="course-tag">AI 商業決策應用</span>
-                        <span class="course-tag">顧客關係管理 (CRM)</span>
+                <div class="facility-item">
+                    <div class="facility-body">
+                        <span class="facility-tag">數位數據</span>
+                        <h4>智慧多媒體與數據實驗室</h4>
+                        <p>配置專業軟體與高效能電腦，進行大數據分析、生成式AI工具應用與行銷素材設計。</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ==========================================================================
-         區塊 4：未來展望與成就領域 (Future & Achievements)
-         ========================================================================== -->
-    <section id="future" class="reveal">
-        <div class="section-header">
-            <div class="section-icon">🏆</div>
-            <h2 class="section-title gold-text">未來展望 ‧ 榮耀藍圖</h2>
-            <div class="section-subtitle">Future Horizons & Career Royal Blueprint</div>
-            <div class="section-ornament">⚜ ─── ❦ ─── ⚜</div>
-        </div>
-
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number gold-text">100%</div>
-                <div class="stat-label">全員企業實習參與率</div>
+    <!-- 頁尾與聯絡資訊 Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <h3>慈濟大學 經營管理學系</h3>
+                    <p>Department of Business Management, Tzu Chi University</p>
+                    <p>智慧永續管理學院 | 結合AI科技與人文價值的卓越學術殿堂</p>
+                </div>
+                <div class="footer-links">
+                    <h4>快速連結</h4>
+                    <ul>
+                        <li><a href="#about">系所簡介</a></li>
+                        <li><a href="#features">本系特色</a></li>
+                        <li><a href="#goals">培育目標</a></li>
+                        <li><a href="studentworks.html">學生作品</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>聯絡資訊</h4>
+                    <p>📍 地址：970374 花蓮市介仁街67號</p>
+                    <p>📞 電話：03-857-2677 分機 31682</p>
+                    <p>✉️ 電子郵件：ss62@gms.tcu.edu.tw</p>
+                    <p>🌐 官方網站：<a href="https://mdm.tcu.edu.tw/" target="_blank" style="color: var(--gold-primary);">mdm.tcu.edu.tw</a></p>
+                </div>
             </div>
-            <div class="stat-card">
-                <div class="stat-number gold-text">15+</div>
-                <div class="stat-label">海外姊妹校雙聯合作</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number gold-text">95%</div>
-                <div class="stat-label">畢業三個月內精準就業</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number gold-text">50+</div>
-                <div class="stat-label">產學 ESG 專案合作案</div>
-            </div>
-        </div>
-
-        <div class="career-blueprint royal-border">
-            <div class="corner-flourish cf-tl">❖</div>
-            <div class="corner-flourish cf-tr">❖</div>
-            <div class="corner-flourish cf-bl">❖</div>
-            <div class="corner-flourish cf-br">❖</div>
-
-            <h3 class="career-title">畢業生發展四柱成就</h3>
-            <ul class="career-list">
-                <li class="career-item">
-                    <span class="career-item-icon">⚜</span>
-                    <div>
-                        <strong style="color: var(--ivory);">高階企業經理人</strong>
-                        <p style="font-size:0.88rem; color: var(--ivory-dark);">跨國企業、金融機構營運導向將領</p>
-                    </div>
-                </li>
-                <li class="career-item">
-                    <span class="career-item-icon">⚜</span>
-                    <div>
-                        <strong style="color: var(--ivory);">ESG 永續顧問師</strong>
-                        <p style="font-size:0.88rem; color: var(--ivory-dark);">輔導企業完成淨零轉型與碳檢測</p>
-                    </div>
-                </li>
-                <li class="career-item">
-                    <span class="career-item-icon">⚜</span>
-                    <div>
-                        <strong style="color: var(--ivory);">商業數據分析師</strong>
-                        <p style="font-size:0.88rem; color: var(--ivory-dark);">運用 AI 與大數據進行策略洞察</p>
-                    </div>
-                </li>
-                <li class="career-item">
-                    <span class="career-item-icon">⚜</span>
-                    <div>
-                        <strong style="color: var(--ivory);">創新創業先鋒</strong>
-                        <p style="font-size:0.88rem; color: var(--ivory-dark);">創立具社會影響力之新創品牌</p>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </section>
-
-    <!-- ==========================================================================
-         皇家頁尾 (Imperial Footer)
-         ========================================================================== -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo gold-text">⚜ 慈濟大學 經營管理學系 ⚜</div>
-            <div class="footer-divider">❦ ─────────── ⚜ ─────────── ❦</div>
-            
-            <div class="footer-info">
-                校址：97004 花蓮市中央路三段701號 (慈濟大學 中央校區 經營管理學系)<br>
-                Department of Business Management, Tzu Chi University, Hualien, Taiwan.<br>
-                電話：+886-3-8565301 轉分機 2541 | 信箱：bm@tcu.edu.tw
-            </div>
-
-            <ul class="footer-links">
-                <li><a href="#about">系所宗旨</a></li>
-                <li><a href="#features">辦學特色</a></li>
-                <li><a href="#curriculum">課程規劃</a></li>
-                <li><a href="#future">未來發展</a></li>
-                <li><a href="#">慈濟大學首頁</a></li>
-            </ul>
-
             <div class="copyright">
-                &copy; Department of Business Management, Tzu Chi University. All Imperial Rights Reserved.
+                <p>&copy; 慈濟大學經營管理學系 版權所有 | Designed for MDM TCU</p>
             </div>
         </div>
     </footer>
 
-    <!-- ==========================================================================
-         內嵌 JavaScript：平滑捲動與滾動 reveal 互動
-         ========================================================================== -->
+    <!-- Internal JS (頁面互動與動畫腳本) -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 1. 平滑捲動 (Smooth Scroll)
-            const anchorLinks = document.querySelectorAll('a[href^="#"]');
-            anchorLinks.forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    const targetId = this.getAttribute('href');
-                    if (targetId !== '#') {
-                        e.preventDefault();
-                        const targetElement = document.querySelector(targetId);
-                        if (targetElement) {
-                            const headerOffset = 85;
-                            const elementPosition = targetElement.getBoundingClientRect().top;
-                            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        // --- 1. 頁籤 (Tabs) 切換功能 ---
+        function openTab(evt, tabId) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabId).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
 
-                            window.scrollTo({
-                                top: offsetPosition,
-                                behavior: 'smooth'
-                            });
-                        }
-                    }
-                });
-            });
+        // --- 2. 手機版選單開關功能 ---
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
 
-            // 2. 頁面滾動漸顯動畫 (Scroll Reveal via Intersection Observer)
-            const revealElements = document.querySelectorAll('.reveal');
-            const observerOptions = {
-                root: null,
-                threshold: 0.15,
-                rootMargin: '0px 0px -50px 0px'
-            };
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
 
-            const revealObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
-                });
-            }, observerOptions);
-
-            revealElements.forEach(el => {
-                revealObserver.observe(el);
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
             });
         });
+
+        // --- 3. 背景金色與耀白光芒漂浮粒子系統 (Canvas Dynamic Particles) ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height + height; // 從螢幕下方或內部誕生
+                this.radius = Math.random() * 2.2 + 0.6;   // 粒子大小
+                this.speedY = Math.random() * 0.6 + 0.2;   // 向上漂浮速度
+                this.speedX = (Math.random() - 0.5) * 0.3; // 左右微幅搖擺
+                
+                // 配色：華麗金、淡金與亮白微粒
+                const colors = [
+                    'rgba(230, 195, 92, ',
+                    'rgba(255, 240, 179, ',
+                    'rgba(255, 255, 255, ',
+                    'rgba(217, 43, 69, ' // 偶爾穿插的璀璨緋紅點綴
+                ];
+                this.colorBase = colors[Math.floor(Math.random() * colors.length)];
+                this.opacity = Math.random() * 0.7 + 0.2;
+                this.fadeSpeed = Math.random() * 0.008 + 0.003;
+                this.growing = Math.random() > 0.5;
+            }
+
+            update() {
+                this.y -= this.speedY;
+                this.x += Math.sin(this.y * 0.005) * this.speedX; // 宛如氣流般流暢搖擺
+
+                // 閃爍淡入淡出效果
+                if (this.growing) {
+                    this.opacity += this.fadeSpeed;
+                    if (this.opacity >= 0.85) this.growing = false;
+                } else {
+                    this.opacity -= this.fadeSpeed;
+                    if (this.opacity <= 0.15) this.growing = true;
+                }
+
+                // 飄出頂部時重置回底部
+                if (this.y < -10) {
+                    this.reset();
+                    this.y = height + 10;
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.colorBase + this.opacity + ')';
+                ctx.shadowBlur = this.radius * 4;
+                ctx.shadowColor = this.colorBase + '0.8)';
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            resizeCanvas();
+            particles = [];
+            // 依據螢幕解析度動態計算粒子數量
+            const count = Math.floor((width * height) / 12000);
+            for (let i = 0; i < count; i++) {
+                const p = new Particle();
+                p.y = Math.random() * height; // 初始隨機散佈在全螢幕
+                particles.push(p);
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        // 監聽視窗大小改變
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+        });
+
+        // 啟動動畫 loop
+        initParticles();
+        animate();
     </script>
 </body>
 </html>

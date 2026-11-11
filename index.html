@@ -84,9 +84,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.9rem 1.5rem;
+            padding: 0.8rem 1.5rem;
         }
 
+        /* 品牌 Logo 區 (王冠圖標 + 雙層金色尊榮標題) */
         .brand-logo {
             display: flex;
             align-items: center;
@@ -94,24 +95,40 @@
             text-decoration: none;
         }
 
-        .brand-badge {
-            background: linear-gradient(135deg, var(--royal-blue), #2b3a75);
-            color: var(--gold-primary);
-            border: 1px solid var(--gold-primary);
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            box-shadow: 0 0 10px rgba(230, 195, 92, 0.2);
+        .brand-icon-svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--gold-primary);
+            filter: drop-shadow(0 0 6px rgba(230, 195, 92, 0.6));
+            flex-shrink: 0;
         }
 
-        .brand-title {
-            font-size: 1.3rem;
+        .brand-text-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-title-main {
+            font-size: 1.25rem;
             font-weight: 700;
-            color: var(--text-main);
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(240, 243, 250, 0.3);
+            letter-spacing: 2px;
+            background: linear-gradient(180deg, #ffffff 10%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            filter: drop-shadow(0 1px 4px rgba(0,0,0,0.8));
+        }
+
+        .brand-title-sub {
+            font-family: 'Cinzel', serif;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 1.8px;
+            color: var(--gold-primary);
+            opacity: 0.9;
+            text-transform: uppercase;
+            margin-top: 1px;
+            text-shadow: 0 0 6px var(--gold-glow);
         }
 
         .nav-links {
@@ -197,21 +214,21 @@
             text-align: center;
         }
 
-        /* 1. 用 <img> 鋪滿背景與設定淡化效果 */
+        /* 鋪滿背景的圖片 <img> 標籤 */
         .hero-bg-img {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;         /* 自動保持比例裁剪鋪滿 */
+            object-fit: cover;
             object-position: center;
-            opacity: 0.35;             /* 圖片淡化數值 (可自行改 0.2 ~ 0.5) */
+            opacity: 0.35;
             z-index: 0;
             pointer-events: none;
         }
 
-        /* 2. 暗色漸層遮罩層 (讓圖文對比更強，襯托主題) */
+        /* 暗色漸層遮罩層 */
         .hero-overlay {
             position: absolute;
             top: 0;
@@ -235,7 +252,7 @@
             z-index: 3;
         }
 
-        /* 3. 文字與按鈕內容層 */
+        /* 文字與按鈕內容層 */
         .hero-content {
             max-width: 900px;
             margin: 0 auto;
@@ -244,7 +261,6 @@
             z-index: 2;
         }
 
-        /* 中央金色裝飾環 */
         .hero-content::before {
             content: '';
             position: absolute;
@@ -670,6 +686,14 @@
                 font-size: 2.1rem;
             }
 
+            .brand-title-main {
+                font-size: 1.05rem;
+            }
+
+            .brand-title-sub {
+                font-size: 0.55rem;
+            }
+
             .about-grid {
                 grid-template-columns: 1fr;
             }
@@ -710,9 +734,15 @@
     <!-- 導覽列 Navbar -->
     <nav class="navbar">
         <div class="navbar-container">
+            <!-- 修改後包含王冠圖標與中英文尊榮字體的 Logo 區 -->
             <a href="#" class="brand-logo">
-                <span class="brand-badge">Tzu Chi University</span>
-                <span class="brand-title">經營管理學系</span>
+                <svg class="brand-icon-svg" viewBox="0 0 24 24">
+                    <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
+                </svg>
+                <div class="brand-text-group">
+                    <span class="brand-title-main">慈濟大學 經營管理學系</span>
+                    <span class="brand-title-sub">DEPARTMENT OF BUSINESS MANAGEMENT</span>
+                </div>
             </a>
             <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
             <ul class="nav-links" id="navLinks">
@@ -726,15 +756,11 @@
         </div>
     </nav>
 
-    <!-- Hero 形象視覺區 (加入 img 標籤) -->
+    <!-- Hero 形象視覺區 (淡化背景圖 + 光芒) -->
     <header class="hero-section">
-        <!-- 1. 鋪滿背景的圖片 <img> 標籤 -->
         <img src="graph/D.jpg" alt="慈濟大學校園景色" class="hero-bg-img" id="heroBgImg">
-        
-        <!-- 2. 暗色漸層遮罩 -->
         <div class="hero-overlay"></div>
 
-        <!-- 3. 文字與按鈕區塊 -->
         <div class="hero-content">
             <div class="hero-subtitle">Department of Business Management | Tzu Chi University</div>
             <h1 class="hero-title">培育兼具AI應用與人文素養的<br>智慧管理人才</h1>
@@ -910,7 +936,7 @@
         </div>
     </footer>
 
-    <!-- Internal JS (頁面互動與動態粒子腳本) -->
+    <!-- Internal JS -->
     <script>
         // --- 1. 頁籤 (Tabs) 切換功能 ---
         function openTab(evt, tabId) {

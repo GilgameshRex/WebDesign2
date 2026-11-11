@@ -189,16 +189,20 @@
         .hero-section {
             padding-top: 160px;
             padding-bottom: 100px;
-            background: 
-                linear-gradient(rgba(11, 13, 20, 0.78), rgba(11, 13, 20, 0.85)),
-                url('./graph/D.jpg') no-repeat center center;
-            background-size: cover;
-            color: var(--text-main);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            border-bottom: 1px solid var(--border-gold);
-            z-index: 1;
+        /* 拆開寫 background-image 與屬性 */
+        background-image: 
+            linear-gradient(rgba(11, 13, 20, 0.78), rgba(11, 13, 20, 0.85)),
+            url('./graph/D.jpg');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        color: var(--text-main);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        border-bottom: 1px solid var(--border-gold);
+        z-index: 1;
         }
 
         .hero-section::after {

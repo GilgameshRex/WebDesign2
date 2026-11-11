@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Internal CSS (內部樣式表 - 璀璨皇家騎士色系 ＋ 淡化背景圖) -->
+    <!-- Internal CSS (內部樣式表) -->
     <style>
         :root {
             /* 主配色：取自聖槍騎士聖潔與璀璨色彩 */
@@ -185,23 +185,42 @@
             cursor: pointer;
         }
 
-        /* Hero 形象視覺區 (結合淡化校園圖片 graph/D.jpg 與光芒漸層) */
+        /* Hero 形象視覺區 (容器) */
         .hero-section {
             padding-top: 170px;
             padding-bottom: 110px;
-            /* 正確對應您的 GitHub 專案目錄 graph/D.jpg，並透過半透明漸層實現質感淡化 */
-            background-image: 
-                linear-gradient(rgba(11, 13, 20, 0.65), rgba(11, 13, 20, 0.75)),
-                url('./graph/D.jpg');
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            color: var(--text-main);
-            text-align: center;
             position: relative;
             overflow: hidden;
             border-bottom: 1px solid var(--border-gold);
             z-index: 1;
+            background-color: var(--bg-dark);
+            text-align: center;
+        }
+
+        /* 1. 用 <img> 鋪滿背景與設定淡化效果 */
+        .hero-bg-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;         /* 自動保持比例裁剪鋪滿 */
+            object-position: center;
+            opacity: 0.35;             /* 圖片淡化數值 (可自行改 0.2 ~ 0.5) */
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* 2. 暗色漸層遮罩層 (讓圖文對比更強，襯托主題) */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(11, 13, 20, 0.45) 0%, rgba(11, 13, 20, 0.88) 100%);
+            z-index: 1;
+            pointer-events: none;
         }
 
         .hero-section::after {
@@ -213,8 +232,10 @@
             height: 1px;
             background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
             box-shadow: 0 0 15px var(--gold-primary);
+            z-index: 3;
         }
 
+        /* 3. 文字與按鈕內容層 */
         .hero-content {
             max-width: 900px;
             margin: 0 auto;
@@ -223,7 +244,7 @@
             z-index: 2;
         }
 
-        /* 背景中央金色飾環效果 */
+        /* 中央金色裝飾環 */
         .hero-content::before {
             content: '';
             position: absolute;
@@ -700,14 +721,20 @@
                 <li><a href="#goals">培育目標</a></li>
                 <li><a href="#facilities">專業設施</a></li>
                 <li><a href="#contact">聯絡資訊</a></li>
-                <!-- 學生作品連至 studentworks.html -->
                 <li><a href="studentworks.html" class="btn-works">學生作品</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero 形象區 (包含 graph/D.jpg 淡化背景) -->
+    <!-- Hero 形象視覺區 (加入 img 標籤) -->
     <header class="hero-section">
+        <!-- 1. 鋪滿背景的圖片 <img> 標籤 -->
+        <img src="graph/D.jpg" alt="慈濟大學校園景色" class="hero-bg-img" id="heroBgImg">
+        
+        <!-- 2. 暗色漸層遮罩 -->
+        <div class="hero-overlay"></div>
+
+        <!-- 3. 文字與按鈕區塊 -->
         <div class="hero-content">
             <div class="hero-subtitle">Department of Business Management | Tzu Chi University</div>
             <h1 class="hero-title">培育兼具AI應用與人文素養的<br>智慧管理人才</h1>

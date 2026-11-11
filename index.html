@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Internal CSS (內部樣式表 - 純 CSS 璀璨亮金騎士視覺) -->
+    <!-- Internal CSS (內部樣式表 - 璀璨皇家騎士色系 ＋ 淡化背景圖) -->
     <style>
         :root {
             /* 主配色：取自聖槍騎士聖潔與璀璨色彩 */
@@ -185,15 +185,17 @@
             cursor: pointer;
         }
 
-        /* Hero 形象區：純 CSS 璀璨皇家漸層與光澤 (不使用外部圖檔，保證 100% 讀取成功) */
+        /* Hero 形象視覺區 (結合淡化校園圖片 graph/D.jpg 與光芒漸層) */
         .hero-section {
             padding-top: 170px;
             padding-bottom: 110px;
-            background: 
-                radial-gradient(ellipse at 50% -10%, rgba(230, 195, 92, 0.3) 0%, transparent 65%),
-                radial-gradient(circle at 15% 50%, rgba(27, 38, 79, 0.8) 0%, transparent 55%),
-                radial-gradient(circle at 85% 50%, rgba(139, 21, 40, 0.35) 0%, transparent 55%),
-                linear-gradient(180deg, #0b0d14 0%, #121626 50%, #0b0d14 100%);
+            /* 正確對應您的 GitHub 專案目錄 graph/D.jpg，並透過半透明漸層實現質感淡化 */
+            background-image: 
+                linear-gradient(rgba(11, 13, 20, 0.65), rgba(11, 13, 20, 0.75)),
+                url('./graph/D.jpg');
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
             color: var(--text-main);
             text-align: center;
             position: relative;
@@ -221,21 +223,20 @@
             z-index: 2;
         }
 
-        /* 背景中央金色飾環與光亮擴散效果 */
+        /* 背景中央金色飾環效果 */
         .hero-content::before {
             content: '';
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 340px;
-            height: 340px;
-            background: radial-gradient(circle, rgba(230, 195, 92, 0.15) 0%, transparent 70%);
+            width: 360px;
+            height: 360px;
+            background: radial-gradient(circle, rgba(230, 195, 92, 0.12) 0%, transparent 70%);
             border-radius: 50%;
             border: 1px dashed rgba(230, 195, 92, 0.25);
             z-index: -1;
             pointer-events: none;
-            box-shadow: 0 0 80px rgba(230, 195, 92, 0.15);
         }
 
         .hero-subtitle {
@@ -705,7 +706,7 @@
         </div>
     </nav>
 
-    <!-- Hero 形象區 (純 CSS 光芒氣場與金屬質感設計) -->
+    <!-- Hero 形象區 (包含 graph/D.jpg 淡化背景) -->
     <header class="hero-section">
         <div class="hero-content">
             <div class="hero-subtitle">Department of Business Management | Tzu Chi University</div>
@@ -931,12 +932,11 @@
 
             reset() {
                 this.x = Math.random() * width;
-                this.y = Math.random() * height + height; // 從螢幕下方生成
-                this.radius = Math.random() * 2.2 + 0.6;   // 粒子大小
-                this.speedY = Math.random() * 0.6 + 0.25;  // 向上漂浮速度
-                this.speedX = (Math.random() - 0.5) * 0.35; // 左右搖擺
+                this.y = Math.random() * height + height;
+                this.radius = Math.random() * 2.2 + 0.6;   
+                this.speedY = Math.random() * 0.6 + 0.25;  
+                this.speedX = (Math.random() - 0.5) * 0.35; 
 
-                // 配色：華麗金、淡金、耀白與緋紅
                 const colors = [
                     'rgba(230, 195, 92, ',
                     'rgba(255, 240, 179, ',
@@ -953,7 +953,6 @@
                 this.y -= this.speedY;
                 this.x += Math.sin(this.y * 0.005) * this.speedX;
 
-                // 閃爍淡入淡出效果
                 if (this.growing) {
                     this.opacity += this.fadeSpeed;
                     if (this.opacity >= 0.85) this.growing = false;

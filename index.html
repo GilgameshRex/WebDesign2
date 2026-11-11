@@ -8,12 +8,12 @@
     <!-- Google Fonts 載入中文與英文字體 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Internal CSS (內部樣式表 - 璀璨皇家與騎士色系) -->
+    <!-- Internal CSS (內部樣式表 - 純 CSS 璀璨亮金騎士視覺) -->
     <style>
         :root {
-            /* 主配色：取自圖片聖槍騎士聖潔與璀璨色彩 */
+            /* 主配色：取自聖槍騎士聖潔與璀璨色彩 */
             --bg-dark: #0b0d14;              /* 暗夜曜黑背景 */
             --bg-card: rgba(20, 23, 36, 0.85);/* 半透明深藍灰卡片背景 */
             --bg-card-hover: rgba(28, 33, 51, 0.95);
@@ -32,8 +32,8 @@
             --text-muted: #9aa5c4;           /* 柔和藍灰文字 */
             
             --border-gold: rgba(230, 195, 92, 0.35);
-            --border-gold-bright: rgba(230, 195, 92, 0.8);
-            --shadow-glow: 0 0 25px rgba(230, 195, 92, 0.2);
+            --border-gold-bright: rgba(230, 195, 92, 0.85);
+            --shadow-glow: 0 0 25px rgba(230, 195, 92, 0.25);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -53,7 +53,7 @@
             overflow-x: hidden;
         }
 
-        /* 背景畫布：漂浮粒子繪製層 */
+        /* 全螢幕背景畫布：漂浮粒子繪製層 */
         #particle-canvas {
             position: fixed;
             top: 0;
@@ -70,10 +70,10 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(11, 13, 20, 0.88);
+            background: rgba(11, 13, 20, 0.92);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-gold);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 1px 15px var(--gold-glow);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7), 0 1px 15px var(--gold-glow);
             z-index: 1000;
             transition: var(--transition);
         }
@@ -160,7 +160,7 @@
             border-radius: 20px;
             font-weight: 700;
             border: 1px solid var(--gold-primary);
-            box-shadow: 0 0 12px rgba(217, 43, 69, 0.4), inset 0 0 8px rgba(256, 256, 256, 0.2);
+            box-shadow: 0 0 12px rgba(217, 43, 69, 0.4), inset 0 0 8px rgba(255, 255, 255, 0.2);
         }
 
         .nav-links a.btn-works:hover {
@@ -185,24 +185,21 @@
             cursor: pointer;
         }
 
-        /* Hero 形象視覺區 */
+        /* Hero 形象區：純 CSS 璀璨皇家漸層與光澤 (不使用外部圖檔，保證 100% 讀取成功) */
         .hero-section {
-            padding-top: 160px;
-            padding-bottom: 100px;
-        /* 拆開寫 background-image 與屬性 */
-        background-image: 
-            linear-gradient(rgba(11, 13, 20, 0.78), rgba(11, 13, 20, 0.85)),
-            url('./graph/D.jpg');
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-
-        color: var(--text-main);
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-        border-bottom: 1px solid var(--border-gold);
-        z-index: 1;
+            padding-top: 170px;
+            padding-bottom: 110px;
+            background: 
+                radial-gradient(ellipse at 50% -10%, rgba(230, 195, 92, 0.3) 0%, transparent 65%),
+                radial-gradient(circle at 15% 50%, rgba(27, 38, 79, 0.8) 0%, transparent 55%),
+                radial-gradient(circle at 85% 50%, rgba(139, 21, 40, 0.35) 0%, transparent 55%),
+                linear-gradient(180deg, #0b0d14 0%, #121626 50%, #0b0d14 100%);
+            color: var(--text-main);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-gold);
+            z-index: 1;
         }
 
         .hero-section::after {
@@ -217,11 +214,28 @@
         }
 
         .hero-content {
-            max-width: 880px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 0 1.5rem;
             position: relative;
             z-index: 2;
+        }
+
+        /* 背景中央金色飾環與光亮擴散效果 */
+        .hero-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 340px;
+            height: 340px;
+            background: radial-gradient(circle, rgba(230, 195, 92, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            border: 1px dashed rgba(230, 195, 92, 0.25);
+            z-index: -1;
+            pointer-events: none;
+            box-shadow: 0 0 80px rgba(230, 195, 92, 0.15);
         }
 
         .hero-subtitle {
@@ -232,18 +246,18 @@
             color: var(--gold-primary);
             margin-bottom: 1.2rem;
             font-weight: 600;
-            text-shadow: 0 0 10px rgba(230, 195, 92, 0.4);
+            text-shadow: 0 0 12px rgba(230, 195, 92, 0.5);
         }
 
         .hero-title {
-            font-size: 2.9rem;
+            font-size: 3rem;
             font-weight: 700;
             margin-bottom: 1.4rem;
-            line-height: 1.25;
+            line-height: 1.3;
             background: linear-gradient(180deg, #ffffff 30%, var(--gold-light) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.8));
+            filter: drop-shadow(0 4px 15px rgba(0,0,0,0.9));
         }
 
         .hero-desc {
@@ -251,6 +265,9 @@
             color: var(--text-muted);
             margin-bottom: 2.2rem;
             font-weight: 300;
+            max-width: 760px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero-btns {
@@ -260,7 +277,7 @@
         }
 
         .btn {
-            padding: 12px 30px;
+            padding: 12px 32px;
             border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
@@ -273,13 +290,13 @@
             background: linear-gradient(135deg, #c5a038, var(--gold-primary));
             color: #0b0d14;
             font-weight: 700;
-            box-shadow: 0 0 15px var(--gold-glow);
+            box-shadow: 0 0 18px var(--gold-glow);
             border: 1px solid var(--gold-light);
         }
 
         .btn-primary:hover {
             background: linear-gradient(135deg, var(--gold-light), #e6c35c);
-            box-shadow: 0 0 25px rgba(230, 195, 92, 0.6);
+            box-shadow: 0 0 28px rgba(230, 195, 92, 0.7);
             transform: translateY(-2px);
         }
 
@@ -293,7 +310,7 @@
         .btn-outline:hover {
             background: var(--royal-blue);
             color: var(--text-main);
-            box-shadow: 0 0 15px rgba(59, 82, 153, 0.5);
+            box-shadow: 0 0 18px rgba(59, 82, 153, 0.6);
             transform: translateY(-2px);
         }
 
@@ -665,7 +682,7 @@
 </head>
 <body>
 
-    <!-- 全螢幕漂浮粒子畫布 (Canvas) -->
+    <!-- 全螢幕金色與耀白漂浮粒子畫布 (Canvas) -->
     <canvas id="particle-canvas"></canvas>
 
     <!-- 導覽列 Navbar -->
@@ -682,12 +699,13 @@
                 <li><a href="#goals">培育目標</a></li>
                 <li><a href="#facilities">專業設施</a></li>
                 <li><a href="#contact">聯絡資訊</a></li>
+                <!-- 學生作品連至 studentworks.html -->
                 <li><a href="studentworks.html" class="btn-works">學生作品</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero 形象視覺區 -->
+    <!-- Hero 形象區 (純 CSS 光芒氣場與金屬質感設計) -->
     <header class="hero-section">
         <div class="hero-content">
             <div class="hero-subtitle">Department of Business Management | Tzu Chi University</div>
@@ -864,7 +882,7 @@
         </div>
     </footer>
 
-    <!-- Internal JS (頁面互動與動畫腳本) -->
+    <!-- Internal JS (頁面互動與動態粒子腳本) -->
     <script>
         // --- 1. 頁籤 (Tabs) 切換功能 ---
         function openTab(evt, tabId) {
@@ -913,17 +931,17 @@
 
             reset() {
                 this.x = Math.random() * width;
-                this.y = Math.random() * height + height; // 從螢幕下方或內部誕生
+                this.y = Math.random() * height + height; // 從螢幕下方生成
                 this.radius = Math.random() * 2.2 + 0.6;   // 粒子大小
-                this.speedY = Math.random() * 0.6 + 0.2;   // 向上漂浮速度
-                this.speedX = (Math.random() - 0.5) * 0.3; // 左右微幅搖擺
-                
-                // 配色：華麗金、淡金與亮白微粒
+                this.speedY = Math.random() * 0.6 + 0.25;  // 向上漂浮速度
+                this.speedX = (Math.random() - 0.5) * 0.35; // 左右搖擺
+
+                // 配色：華麗金、淡金、耀白與緋紅
                 const colors = [
                     'rgba(230, 195, 92, ',
                     'rgba(255, 240, 179, ',
                     'rgba(255, 255, 255, ',
-                    'rgba(217, 43, 69, ' // 偶爾穿插的璀璨緋紅點綴
+                    'rgba(217, 43, 69, '
                 ];
                 this.colorBase = colors[Math.floor(Math.random() * colors.length)];
                 this.opacity = Math.random() * 0.7 + 0.2;
@@ -933,7 +951,7 @@
 
             update() {
                 this.y -= this.speedY;
-                this.x += Math.sin(this.y * 0.005) * this.speedX; // 宛如氣流般流暢搖擺
+                this.x += Math.sin(this.y * 0.005) * this.speedX;
 
                 // 閃爍淡入淡出效果
                 if (this.growing) {
@@ -944,7 +962,6 @@
                     if (this.opacity <= 0.15) this.growing = true;
                 }
 
-                // 飄出頂部時重置回底部
                 if (this.y < -10) {
                     this.reset();
                     this.y = height + 10;
@@ -964,11 +981,10 @@
         function initParticles() {
             resizeCanvas();
             particles = [];
-            // 依據螢幕解析度動態計算粒子數量
-            const count = Math.floor((width * height) / 12000);
+            const count = Math.floor((width * height) / 11000);
             for (let i = 0; i < count; i++) {
                 const p = new Particle();
-                p.y = Math.random() * height; // 初始隨機散佈在全螢幕
+                p.y = Math.random() * height;
                 particles.push(p);
             }
         }
@@ -982,12 +998,8 @@
             requestAnimationFrame(animate);
         }
 
-        // 監聽視窗大小改變
-        window.addEventListener('resize', () => {
-            resizeCanvas();
-        });
+        window.addEventListener('resize', resizeCanvas);
 
-        // 啟動動畫 loop
         initParticles();
         animate();
     </script>

@@ -5,31 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>慈濟大學 經營管理學系 | Department of Business Management</title>
     
-    <!-- Google Fonts 載入中文與英文字體 -->
+    <!-- Google Fonts 載入古典明體 (Noto Serif TC)、皇家英文字體 (Cinzel) 與黑體 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Internal CSS (內部樣式表) -->
+    <!-- Internal CSS -->
     <style>
         :root {
-            /* 主配色：取自聖槍騎士聖潔與璀璨色彩 */
-            --bg-dark: #0b0d14;              /* 暗夜曜黑背景 */
-            --bg-card: rgba(20, 23, 36, 0.85);/* 半透明深藍灰卡片背景 */
+            --bg-dark: #0b0d14;
+            --bg-card: rgba(20, 23, 36, 0.85);
             --bg-card-hover: rgba(28, 33, 51, 0.95);
             
-            --gold-primary: #e6c35c;         /* 聖槍與髮絲華麗金 */
-            --gold-light: #fff0b3;           /* 璀璨金光 */
+            --gold-primary: #e6c35c;
+            --gold-light: #fff0b3;
             --gold-glow: rgba(230, 195, 92, 0.35);
             
-            --royal-blue: #1b264f;           /* 斗篷皇家深藍 */
-            --blue-accent: #3b5299;          /* 亮藍點綴 */
+            --royal-blue: #1b264f;
+            --blue-accent: #3b5299;
             
-            --crimson-red: #8b1528;          /* 披風飾帶深緋紅 */
+            --crimson-red: #8b1528;
             --crimson-bright: #d92b45;
             
-            --text-main: #f0f3fa;            /* 鎧甲白/純潔白文字 */
-            --text-muted: #9aa5c4;           /* 柔和藍灰文字 */
+            --text-main: #f0f3fa;
+            --text-muted: #9aa5c4;
             
             --border-gold: rgba(230, 195, 92, 0.35);
             --border-gold-bright: rgba(230, 195, 92, 0.85);
@@ -44,7 +43,7 @@
         }
 
         body {
-            font-family: 'Noto Sans TC', 'Roboto', sans-serif;
+            font-family: 'Noto Sans TC', sans-serif;
             color: var(--text-main);
             background-color: var(--bg-dark);
             line-height: 1.6;
@@ -53,7 +52,7 @@
             overflow-x: hidden;
         }
 
-        /* 全螢幕背景畫布：漂浮粒子繪製層 */
+        /* 背景畫布：漂浮粒子層 */
         #particle-canvas {
             position: fixed;
             top: 0;
@@ -87,18 +86,18 @@
             padding: 0.8rem 1.5rem;
         }
 
-        /* 品牌 Logo 區 (王冠圖標 + 雙層金色尊榮標題) */
+        /* 品牌 Logo 區 (精準還原圖 1 百合花飾/王冠圖標與金屬古典書法字體) */
         .brand-logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             text-decoration: none;
         }
 
         .brand-icon-svg {
-            width: 30px;
-            height: 30px;
-            fill: var(--gold-primary);
+            width: 34px;
+            height: 34px;
+            fill: url(#gold-gradient-svg);
             filter: drop-shadow(0 0 6px rgba(230, 195, 92, 0.6));
             flex-shrink: 0;
         }
@@ -108,27 +107,30 @@
             flex-direction: column;
         }
 
+        /* 中文標題：對標圖 1 古典宋/明體與黃金漸層 */
         .brand-title-main {
-            font-size: 1.25rem;
+            font-family: 'Noto Serif TC', 'PMingLiU', serif;
+            font-size: 1.35rem;
             font-weight: 700;
-            letter-spacing: 2px;
-            background: linear-gradient(180deg, #ffffff 10%, var(--gold-light) 100%);
+            letter-spacing: 2.5px;
+            background: linear-gradient(180deg, #fff7cd 0%, #e6c35c 55%, #b88e28 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            line-height: 1.2;
-            filter: drop-shadow(0 1px 4px rgba(0,0,0,0.8));
+            line-height: 1.25;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.9));
         }
 
+        /* 英文標題：對標圖 1 全大寫皇家襯線字 */
         .brand-title-sub {
             font-family: 'Cinzel', serif;
-            font-size: 0.62rem;
+            font-size: 0.65rem;
             font-weight: 700;
-            letter-spacing: 1.8px;
+            letter-spacing: 2.2px;
             color: var(--gold-primary);
-            opacity: 0.9;
+            opacity: 0.95;
             text-transform: uppercase;
-            margin-top: 1px;
-            text-shadow: 0 0 6px var(--gold-glow);
+            margin-top: 2px;
+            text-shadow: 0 0 8px var(--gold-glow);
         }
 
         .nav-links {
@@ -169,7 +171,6 @@
             width: 100%;
         }
 
-        /* 學生作品按鈕 (緋紅+金邊華麗風格) */
         .nav-links a.btn-works {
             background: linear-gradient(135deg, var(--crimson-red), var(--crimson-bright));
             color: var(--text-main);
@@ -202,7 +203,7 @@
             cursor: pointer;
         }
 
-        /* Hero 形象視覺區 (容器) */
+        /* Hero 形象視覺區 */
         .hero-section {
             padding-top: 170px;
             padding-bottom: 110px;
@@ -214,7 +215,6 @@
             text-align: center;
         }
 
-        /* 鋪滿背景的圖片 <img> 標籤 */
         .hero-bg-img {
             position: absolute;
             top: 0;
@@ -228,7 +228,6 @@
             pointer-events: none;
         }
 
-        /* 暗色漸層遮罩層 */
         .hero-overlay {
             position: absolute;
             top: 0;
@@ -252,7 +251,6 @@
             z-index: 3;
         }
 
-        /* 文字與按鈕內容層 */
         .hero-content {
             max-width: 900px;
             margin: 0 auto;
@@ -261,23 +259,8 @@
             z-index: 2;
         }
 
-        .hero-content::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 360px;
-            height: 360px;
-            background: radial-gradient(circle, rgba(230, 195, 92, 0.12) 0%, transparent 70%);
-            border-radius: 50%;
-            border: 1px dashed rgba(230, 195, 92, 0.25);
-            z-index: -1;
-            pointer-events: none;
-        }
-
         .hero-subtitle {
-            font-family: 'Cinzel', 'Noto Sans TC', serif;
+            font-family: 'Cinzel', serif;
             text-transform: uppercase;
             letter-spacing: 3px;
             font-size: 0.95rem;
@@ -288,6 +271,7 @@
         }
 
         .hero-title {
+            font-family: 'Noto Serif TC', serif;
             font-size: 3rem;
             font-weight: 700;
             margin-bottom: 1.4rem;
@@ -370,6 +354,7 @@
         }
 
         .section-title {
+            font-family: 'Noto Serif TC', serif;
             font-size: 2.2rem;
             color: var(--gold-primary);
             font-weight: 700;
@@ -432,6 +417,7 @@
         }
 
         .about-card h3 {
+            font-family: 'Noto Serif TC', serif;
             font-size: 1.45rem;
             color: var(--gold-primary);
             margin-bottom: 18px;
@@ -445,7 +431,7 @@
             opacity: 0.9;
         }
 
-        /* 本系核心特色 Grid */
+        /* 特色區塊 */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -461,7 +447,6 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.4);
             transition: var(--transition);
             text-align: center;
-            position: relative;
         }
 
         .feature-card:hover {
@@ -498,7 +483,7 @@
             color: var(--text-muted);
         }
 
-        /* 核心能力與培育目標 Tab */
+        /* Tab 頁籤區塊 */
         .tabs-container {
             background: var(--bg-card);
             backdrop-filter: blur(8px);
@@ -567,7 +552,7 @@
             text-shadow: 0 0 8px var(--gold-primary);
         }
 
-        /* 實體教室設施 */
+        /* 設施區塊 */
         .facility-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -634,6 +619,7 @@
         }
 
         .footer-info h3 {
+            font-family: 'Noto Serif TC', serif;
             color: var(--gold-primary);
             margin-bottom: 15px;
             font-size: 1.35rem;
@@ -680,14 +666,14 @@
             color: #64708a;
         }
 
-        /* 響應式 RWD 調整 */
+        /* 響應式適應 (RWD) */
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 2.1rem;
             }
 
             .brand-title-main {
-                font-size: 1.05rem;
+                font-size: 1.1rem;
             }
 
             .brand-title-sub {
@@ -728,16 +714,24 @@
 </head>
 <body>
 
-    <!-- 全螢幕金色與耀白漂浮粒子畫布 (Canvas) -->
+    <!-- 全螢幕背景漂浮粒子畫布 (Canvas) -->
     <canvas id="particle-canvas"></canvas>
 
     <!-- 導覽列 Navbar -->
     <nav class="navbar">
         <div class="navbar-container">
-            <!-- 修改後包含王冠圖標與中英文尊榮字體的 Logo 區 -->
+            <!-- 品牌 Logo 區 (圖 1 百合花飾圖標與中英文黃金書法文字) -->
             <a href="#" class="brand-logo">
-                <svg class="brand-icon-svg" viewBox="0 0 24 24">
-                    <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
+                <svg class="brand-icon-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="gold-gradient-svg" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#fff7cd" />
+                            <stop offset="50%" stop-color="#e6c35c" />
+                            <stop offset="100%" stop-color="#b88e28" />
+                        </linearGradient>
+                    </defs>
+                    <!-- 精確 Fleur-de-lis (百合花飾/皇家徽章) 路徑 -->
+                    <path d="M12 2C11.5 4.2 9.8 5.8 8.2 6.3C6.5 6.8 4.5 5.7 4 4C3.4 6.8 4.6 9.5 7.2 11.1C5.6 11.6 4 11 2.5 10C3.1 12.8 5.3 14.5 8 14.5C6.8 15.6 5.2 16.2 3.5 16.2C5.8 17.8 9.5 17.3 11 15.6V19H7.5V21H16.5V19H13V15.6C14.5 17.3 18.2 17.8 20.5 16.2C18.8 16.2 17.2 15.6 16 14.5C18.7 14.5 20.9 12.8 21.5 10C20 11 18.4 11.6 16.8 11.1C19.4 9.5 20.6 6.8 20 4C19.5 5.7 17.5 6.8 15.8 6.3C14.2 5.8 12.5 4.2 12 2Z"/>
                 </svg>
                 <div class="brand-text-group">
                     <span class="brand-title-main">慈濟大學 經營管理學系</span>
@@ -756,7 +750,7 @@
         </div>
     </nav>
 
-    <!-- Hero 形象視覺區 (淡化背景圖 + 光芒) -->
+    <!-- Hero 形象視覺區 -->
     <header class="hero-section">
         <img src="graph/D.jpg" alt="慈濟大學校園景色" class="hero-bg-img" id="heroBgImg">
         <div class="hero-overlay"></div>
@@ -871,7 +865,7 @@
         </div>
     </section>
 
-    <!-- 區塊四：專業實體教室設施 -->
+    <!-- 區塊四：專業設施 -->
     <section id="facilities" class="section">
         <div class="container">
             <div class="section-header">
@@ -938,22 +932,21 @@
 
     <!-- Internal JS -->
     <script>
-        // --- 1. 頁籤 (Tabs) 切換功能 ---
+        // 1. Tab 頁籤切換
         function openTab(evt, tabId) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
+            const tabcontent = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].classList.remove("active");
             }
-            tablinks = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tablinks.length; i++) {
+            const tablinks = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < tablinks.length; i++) {
                 tablinks[i].classList.remove("active");
             }
             document.getElementById(tabId).classList.add("active");
             evt.currentTarget.classList.add("active");
         }
 
-        // --- 2. 手機版選單開關功能 ---
+        // 2. 手機版選單切換
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navLinks = document.getElementById('navLinks');
 
@@ -967,7 +960,7 @@
             });
         });
 
-        // --- 3. 背景金色與耀白光芒漂浮粒子系統 (Canvas Dynamic Particles) ---
+        // 3. 背景漂浮粒子動畫 (Canvas)
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let width, height;
@@ -986,9 +979,9 @@
             reset() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height + height;
-                this.radius = Math.random() * 2.2 + 0.6;   
-                this.speedY = Math.random() * 0.6 + 0.25;  
-                this.speedX = (Math.random() - 0.5) * 0.35; 
+                this.radius = Math.random() * 2.2 + 0.6;
+                this.speedY = Math.random() * 0.6 + 0.25;
+                this.speedX = (Math.random() - 0.5) * 0.35;
 
                 const colors = [
                     'rgba(230, 195, 92, ',
@@ -1051,7 +1044,6 @@
         }
 
         window.addEventListener('resize', resizeCanvas);
-
         initParticles();
         animate();
     </script>
